@@ -336,28 +336,28 @@ Simplex metod optimizuje linearnu funkciju pomerajući se po ivicama pogodne obl
 
 ### 6.3.1 Primer primene simplex algoritma – Farmer:\
 Farmer može posaditi šargarepu (4 tone) i krompir (3 tone), ima 5 tona đubriva (dakle, može posaditi maksimalno 5 tona povrća). Krompir donosi 1,2 evra po kilogramu, dok šargarepa donosi 1,7 evra. Cilj je maksimizacija profita: \
-1. Definišemo funkciju: $f(x_1, x_2) = 1.7*x_1 + 1.2*x_2$, sa ograničenjima:\
+1. Definišemo funkciju: f($x_1, x_2$) = 1.7 * $x_1$ + 1.2 * $x_2$, sa ograničenjima:\
 $$x_1 \leq 4000$$\
 $$x_2 \leq 3000$$\
-$$x_1 + x_2 \leq 5000$$\
+$$x_1 + x_2 \leq 5000$$
 2. Tight: $x_1$, $x2$:\
 $$x_1 + s_1 = 4000$$\
 $$x_2 + s_2 = 3000$$\
-$$x_1 + x_2 + s_3 = 5000$$\
+$$x_1 + x_2 + s_3 = 5000$$
 3. Loose: $s_1$, $s_2$, $s_3$:\
 $$s_1 = 4000 - x_1$$\
 $$s_2 = 3000 - x_2$$\
-$$s_3 = 5000 - x_1 - x_2$$\
-4. U formuli $max(1.7*x_1 + 1.2*x_2)$, najveći koeficijent ima $x_1$, pa prelazi u loose skup, posmatramo u kojim fomrulama se pojavljuje, vidimo ga u 1. i 3., upoređujemo razmere $-4000 \geq -5000$, dakle $s_1$ prelazi u tight skup. Raspoređujemo opet tight i loose elemente na predodređene strane jednačine, pa se menja samo prva jednačina $x_1 = 4000 - s_1$ i menjamo je u sve ostale:\
+$$s_3 = 5000 - x_1 - x_2$$
+4. U formuli max(1.7 * $x_1$ + 1.2 * $x_2$), najveći koeficijent ima $x_1$, pa prelazi u loose skup, posmatramo u kojim fomrulama se pojavljuje, vidimo ga u 1. i 3., upoređujemo razmere $-4000 \geq -5000$, dakle $s_1$ prelazi u tight skup. Raspoređujemo opet tight i loose elemente na predodređene strane jednačine, pa se menja samo prva jednačina $x_1 = 4000 - s_1$ i menjamo je u sve ostale:\
 $$x_1 = 4000 - s_1$$\
 $$s_2 = 3000 - x_2$$\
 $$s_3 = 1000 + s_1 - x_2$$\
-$$max(-1.7*s_1 + 1.2*x_2 + 6800)$$\
+max(-1.7 * $s_1$ + 1.2 * $x_2$ + 6800)\
 Kako idalje imamo pozitivne koeficijente u funkciji ponavljamo 4. korak. Sada je najveći koeficijent uz $x_2$ dakle on prelazi u skup loose, upoređujemo razmere $-3000 \leq -1000$, prebacujemo $s_3$ u tight i dobijemao $x_2 = 1000 - s_1 - s_3$, pa nju menjamo u ostale:\
 $$x_1 = 4000 - s_1$$\
 $$s_2 = 2000 - s_1 + s_3$$\
 $$x_2 = 1000 + s_1 - s_3$$\
-$$max(0.5*s_1 - 1.2*s_3 + 8000)$$\
+max(0.5 * $s_1$ - 1.2 * $s_3$ + 8000)\
 Kako su obe konstante negative znamo da ako pokušamo da maksimizujemo samo ćemo naći manja rešenja. Da bi našli traženu maksimalnu vrednost dovoljno je da zamenimo $s_1$ i $s_3$ sa 0, dobijamo 8000. Ako nas zanimaju vrednosti $x_1$ i $x_2$ dovoljno je da zamenimo $s_1$ i $s_3$ sa 0 u ograničenjima koje smo dobili, $x_1 = 4000$ i $x_2 = 1000$. Što je i tačno, pogledati maksimalno rešenje geoetrijskim pristupom. 
 
 Kod linearnih programa, poželjno je koristiti veće brojeve za izražavanje vrednosti. Na primer koristimo tone umesto kilograma, što poboljšava tačnost proračuna.
