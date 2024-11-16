@@ -308,7 +308,7 @@ Za pronalaženje optimalnog rešenja linearna funkcija (npr. ( ax + by = c )) se
 
 |Svi uslovi|Dobijen pogodni region|
 |-|-|
-|![](slikeZaSkriptu/farmerGeometrijski.png)|![](slikeZaSkriptu/farmerDopustiviRegion.png)|
+|![](slike/farmerGeometrijski.png)|![](slike/farmerDopustiviRegion.png)|
 
 Plavo predstavlja ograničenje količine šargarepa, crveno ogranićenje krompira, zeleno da njihov zbir ne prelazi 5000.
 
@@ -316,7 +316,7 @@ Na slici vidimo da je zapravo pogodan region bas presek ove tri boje, racunajuci
 
 |Minimum|Neka srednja vrednost|Maksimum|
 |-|-|-|
-|![](slikeZaSkriptu/minGeom.png)|![](slikeZaSkriptu/midGeom.png)|![](slikeZaSkriptu/maxGeom.png)|
+|![](slike/minGeom.png)|![](slike/midGeom.png)|![](slike/maxGeom.png)|
 
 Pomeranjem funkcije ax + by = c, uvećavanjem konstante c nalazimo maksimum. Minimalno rešenje za c = 0, a maksimum za c = 8000.
 
