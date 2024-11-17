@@ -95,6 +95,7 @@ Logika nije strogo binarna (0 ili 1), već vrednosti mogu biti između 0.0 i 1.0
 |S|Trapez|Trougao|
 |-|-|-|
 |![](slike/sFuzzy.png)|![](slike/trapezFuzzy.png)|![](slike/triangleFuzzy.png)|
+
 Fazi logika dozvoljava rad sa nepreciznim, nejasnim ili nepotpunim informacijama, simulirajući ljudsko rasuđivanje u takvim uslovima. Koriste se u oblasti kontrole, kao što su pametni termostati ili sistemi za navigaciju.
 
 # 3. Veliki jezički modeli (LLM): 
