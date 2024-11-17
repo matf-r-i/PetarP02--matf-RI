@@ -399,13 +399,13 @@ Imamo 8 različitih objekata svaki ima svoju težinu (4, 2, 8, 3, 7, 5, 9, 6) i 
 Za ovaj problem možemo da koristimo binarne promenljive (jesmo li uzeli ili ne objekat).
 Postavka zadatka je sledeća:
 1. Ograničavamo svaku promenljivu da može biti 1 ili 0 koristeći sledeća dva ograničenja:
-$$0 \leq o_1$$ $$o_2 \leq 1$$
+	$$0 \leq o_1$$ $$o_2 \leq 1$$
 	Istu stvar bi uradili za svaki objekat:
 	$$0 \leq o_1, o_2, o_3, o_4, o_5, o_6, o_7, o_8 \leq 1$$
 1. Pišemo ostala ograničenja kao što bi inače pisali u LP:
 	Ograničenje težine:
 	$$4 * o_1 + 2 * o_2 + 8 * o_3 + 3 * o_4 + 7 * o_5 + 5 * o_6 + 9 * o_7 + 6 * o_8 \leq 17$$
 3. I konačno funkcija koju želimo da maksimizujemo:
-	max($19 * o_1 + 17 * o_2 + 30 * o_3 + 13 * o_4 + 25 * o_5 + 29 * o_6 + 23 * o_8 + 10 * o_8$)
+	max($19 * o_1 + 17 * o_2 + 30 * o_3 + 13 * o_4 + 25 * o_5 + 29 * o_6 + 23 * o_8 + 10 * o_8$)\
 	Radi lepšeg ispisa možemo zameniti sve ove promenljive vektorima.
 
