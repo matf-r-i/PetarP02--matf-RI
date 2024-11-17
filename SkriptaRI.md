@@ -15,20 +15,15 @@ Grana veštačke inteligencije koja omogućava sistemima da uče iz podataka bez
 Kako podaci postaju zastareli, zrelost modela opada što znači da modeli postaju manje tačni i efikasni vremenom.
 
 # 2. Paradigme u veštačkoj inteligenciji:
-### Veštačke neuronske mreže (ANN): 
-Ove mreže su inspirisane ljudskim mozgom i koriste neuronske jedinice (neurone) koje primaju, obrađuju i prenose informacije. Njihova primena je široka, uključujući prepoznavanje zvuka i slike, kontrolu robota, automatizaciju, i slično. ANN funkcionišu tako što informacije prolaze kroz slojeve veštačkih neurona, koji primenjuju težine (w1, w2, w3…) i aktivacione funkcije kako bi odlučili da li i kako dalje prenose signal.
+ 
+ Osnovne paradigme: 
+1. Veštačke neuronske mreže (ANN)  
+2. Evolutivna izračunavanja (EC) 
+3. Inteligencija grupa (SI)
+4. Veštački imuni sistem (AIS)
+5. Rasplinuti sistemi (Fuzzy systems)
 
-### Evolutivna izračunavanja (EC): 
-Ova paradigma koristi evolucione algoritme zasnovane na prirodnoj selekciji i genetičkoj evoluciji za rešavanje problema. Primeri su genetski algoritmi i evolucione strategije, koje se koriste za optimizaciju i traženje rešenja u složenim problemima, kao što su dizajn inženjerskih sistema ili treniranje modela mašinskog učenja.
-
-### Inteligencija grupa (SI):
-Ova oblast istražuje kolektivno ponašanje grupe jednostavnih agenata, kao što je rojevi ptica, mravi ili ribe. Algoritmi koji se baziraju na ovoj paradigmi koriste se u rešavanju problema optimizacije, poput putanja dronova, upravljanja flotom vozila ili simulacije tržišnih kretanja.
-
-### Veštački imuni sistem (AIS): 
-Inspirisan biološkim imunim sistemom, AIS algoritmi koriste se za prepoznavanje i reagovanje na anomalije u podacima. Ovi sistemi se često koriste u sajber bezbednosti, za detekciju zlonamernog softvera ili napada, kao i u medicini za otkrivanje bolesti.
-
-### Rasplinuti sistemi (Fuzzy systems): 
-Ovo su sistemi koji mogu raditi sa nejasnim, nepotpunim ili dvosmislenim informacijama. Umesto da koriste striktna pravila kao klasični sistemi, rasplinuti sistemi omogućavaju "sive zone", gde se odluke donose na osnovu verovatnoće ili približnih vrednosti. Koriste se u oblasti kontrole, kao što su pametni termostati ili sistemi za navigaciju.
+O svim paradigmama biće dodatno rečeno. Svaka od paradigmi ima svoje podparadigme zasnovane/inspirisane istim principima.
 
 ## 2.1 Veštačke neuronske mreže (ANN):
 Ove mreže oponašaju način na koji ljudski mozak obrađuje informacije, koristeći veštačke neurone koji obrađuju informacije kroz slojeve. Svaki neuron prima ulazne podatke (npr. informacije iz okruženja ili drugih neurona), množi ih odgovarajućim težinama (w1, w2, w3…) i primenjuje aktivacionu funkciju kako bi odlučio da li će poslati signal i sa kojom snagom. ANN se široko koriste u oblastima kao što su prepoznavanje zvuka (npr. u glasovnim asistentima), prepoznavanje oblika (npr. u računalnoj viziji), i kontrola robota.
@@ -40,7 +35,7 @@ Ovi koncepti i alati su ključni za razumevanje savremenih tehnika veštačke in
 ## 2.2 Evolutivna izračunavanja (EC)
 Evolutivna izračunavanja su metoda optimizacije zasnovana na simulaciji prirodne selekcije, gde se jedinke koje su bolje prilagođene okruženju "preživljavaju" i prenose svoje "gene" (karakteristike) na sledeće generacije. Oni koji se lošije prilagode ne prenose svoje gene, što omogućava da populacija u celini postane bolja vremenom. Rekombinacija gena preživelih jedinki stvara nova rešenja, simulirajući prirodni evolucioni proces. Na ovaj način, evolutivni algoritmi "uče" kroz generacije kako da dođu do optimalnog rešenja za zadati problem.
 
-### Ključni koncepti:
+#### Ključni koncepti:
 - **Populacija:** Skup potencijalnih rešenja (jedinki) u algoritmu.
 - **Fitnes funkcija:** Funkcija koja ocenjuje koliko je svaka jedinka uspešna u rešavanju problema.
 - **Selektivni pritisak:** Jedinke sa boljim karakteristikama imaju veću šansu da prenesu svoje gene na sledeće generacije.
@@ -49,7 +44,7 @@ Evolutivna izračunavanja su metoda optimizacije zasnovana na simulaciji prirodn
 Genetski algoritmi su najpoznatija forma evolutivnih izračunavanja i funkcionišu tako što predstavljaju rešenja problema kao nizove binarnih vrednosti (0 i 1), poznate kao "hromozomi". Svaki hromozom predstavlja jedan mogući način rešavanja problema. Algoritam zatim koristi operacije kao što su **rekombinacija (ukrštanje)** i **mutacija** kako bi stvorio nove jedinke (nove nizove 0 i 1) u svakoj generaciji. Ove nove jedinke se zatim testiraju pomoću fitnes funkcije, a one koje daju bolje rezultate imaju veće šanse da budu zadržane i dalje evoluiraju.
 
 #### Ključne operacije u GA:
-- **Ukštanje (Crossover):** Dva roditeljska rešenja se kombinuju da bi se kreirala nova rešenja.
+- **Ukrštanje (Crossover):** Dva roditeljska rešenja se kombinuju da bi se kreirala nova rešenja.
 - **Mutacija:** Nasumična promena vrednosti unutar rešenja, koja obezbeđuje raznolikost i izbegava lokalne minimume.
 
 ![](slike/GA.png)
@@ -79,7 +74,7 @@ Koevolucija opisuje proces u kojem različite populacije evoluiraju u međusobno
 - Koristi se u problemima gde postoji višestruka interakcija između različitih elemenata, kao što su igre sa više igrača, tržišne simulacije, ili optimizacija mreža.
 
 ### 2.2.5 Koristi evolutivnih izračunavanja:
-Evolutivna izračunavanja se najčešće koriste kada:
+#### Evolutivna izračunavanja se najčešće koriste kada:
 
 1. **Ne postoji deterministički algoritam** koji može u prihvatljivom vremenu dati rešenje za problem. Na primer, složeni problemi optimizacije ili NP-teški problemi ne mogu se efikasno rešiti determinističkim algoritmima.
 2. **Klasifikacija podataka** je potrebna, mada mašinsko učenje često nudi bolja rešenja za ove zadatke. Ipak, evolutivni algoritmi mogu biti korisni kada je problem specifičan ili ne može lako da se modelira korišćenjem tradicionalnih tehnika mašinskog učenja. 
@@ -93,31 +88,34 @@ Odnosi se na sposobnost grupa organizama, poput ptica, mrava ili pčela, da poka
 PSO je metoda optimizacije koja se zasniva na kolektivnom ponašanju jata ptica. U ovom algoritmu, ptice (ili čestice) se kreću kroz višedimenzioni prostor podataka, tražeći optimalno rešenje problema. Svaka čestica u PSO algoritmu prilagođava svoju poziciju na osnovu sopstvenog iskustva i iskustva drugih čestica iz jata. Kako se ptice kreću kroz prostor, privlače jedna drugu ka boljim rešenjima, pa su veće šanse da će se kretati ka optimalnom rešenju. Na sličan način funkcionišu i algoritmi zasnovani na ponašanju mrava (ACO - Ant Colony Optimization), gde mravi tragaju za optimalnim rešenjem problema zasnovanim na lokalnim interakcijama i ponašanju grupe.
 
 ## 2.4 Rasplinuti (fuzzy) sistemi: 
-Predstavljaju metodu obrade podataka u kojoj logika nije strogo binarna (0 ili 1), već vrednosti mogu biti između 0.0 i 1.0. U ovim sistemima, odluke se donose na osnovu stepena pripadnosti određenim skupovima, što omogućava fino podešavanje odluka i ponašanja u situacijama koje nisu strogo definisane. Fazi logika dozvoljava rad sa nepreciznim, nejasnim ili nepotpunim informacijama, simulirajući ljudsko rasuđivanje u takvim uslovima.
+Ovo su sistemi koji mogu raditi sa nejasnim, nepotpunim ili dvosmislenim informacijama. 
+Umesto da koriste striktna pravila kao klasični sistemi, rasplinuti sistemi omogućavaju "sive zone", gde se odluke donose na osnovu verovatnoće ili približnih vrednosti.
+Logika nije strogo binarna (0 ili 1), već vrednosti mogu biti između 0.0 i 1.0. U ovim sistemima, odluke se donose na osnovu stepena pripadnosti određenim skupovima, što omogućava fino podešavanje odluka i ponašanja u situacijama koje nisu strogo definisane. 
 
 |S|Trapez|Trougao|
 |-|-|-|
 |![](slike/sFuzzy.png)|![](slike/trapezFuzzy.png)|![](slike/triangleFuzzy.png)|
+Fazi logika dozvoljava rad sa nepreciznim, nejasnim ili nepotpunim informacijama, simulirajući ljudsko rasuđivanje u takvim uslovima. Koriste se u oblasti kontrole, kao što su pametni termostati ili sistemi za navigaciju.
 
 # 3. Veliki jezički modeli (LLM): 
 Složeni algoritmi zasnovani na ANN, kao što su chat roboti, koji su trenirani na velikim količinama podataka kako bi mogli da razumeju i odgovaraju na pitanja u prirodnom jeziku. Ovi modeli koriste prethodno analizirane i ispitane podatke, i primenjuju se u specifičnim, užim domenima, ali su dovoljno fleksibilni da odgovaraju na različite upite u okviru svog znanja. Velika baza podataka omogućava im da analiziraju i razumeju pitanja, a zatim generišu odgovore koristeći tehnike generisanja prirodnog jezika (NLG - Natural Language Generation).
 
-## 3.1 Način rada LLM-a:
+#### Način rada LLM-a:
 1. **Analiza podataka pomoću dubokog učenja:** Ovaj proces uključuje obradu i razumevanje velikih količina podataka kako bi LLM model mogao da nauči zakonitosti ljudskog jezika.
 
 2. **Generisanje odgovora na osnovu podataka (NLG):** Nakon što LLM razume pitanje, koristi svoju bazu znanja da generiše koherentan i relevantan odgovor.
 
-## 3.2 Proces pravljenja LLM-a:
+#### Proces pravljenja LLM-a:
 
 1. **Priprema:** U ovoj fazi vrši se tokenizacija (razbijanje teksta na manje delove ili tokene), uzorkovanje podataka i umetanje tokena koji su relevantni za dalje učenje modela.
 2. **Mehanizam pažnje (attention mechanism):** Fokusira se na specifične delove ulaznih podataka kako bi generisao specifične delove izlaznih odgovora, omogućavajući modelu da efikasnije procesira relevantne informacije. Dve popularne kategorije su **instruction** i **classification** fine-tuning.
-    - Instruction fine-tuning : podaci sadrže instrukcije i već predodređena rešenja.
-    - Classification fine-tuning : podaci su označeni sa klasom koju treba da asociraju (npr. mejlovi koji su asocirani sa "spam" i "not spam") 
+    - **Instruction fine-tuning** : podaci sadrže instrukcije i već predodređena rešenja.
+    - **Classification fine-tuning** : podaci su označeni sa klasom koju treba da asociraju (npr. mejlovi koji su asocirani sa "spam" i "not spam") 
 3. **Arhitektura LLM-a:** Sve informacije se kombinuju u koherentnu strukturu koja omogućava modelu da obavlja zadatke učenja i generisanja odgovora.
 4. **Prethodno treniranje i treniranje:** Model se inicijalno trenira od nule koristeći velike skupove podataka, gde uči osnovne jezičke strukture i zakonitosti.
 5. **Fino obučavanje:** Nakon inicijalnog treniranja, model se dodatno usavršava na specifičnim skupovima podataka, kako bi bio prilagođen za određene domene i zadatke (na primer, pravni savetnici, medicinski asistenti).
 
-## 3.3 Transformer arhitektura:
+## 3.1 Transformer arhitektura:
 Većina LLM-ova se oslanja na transformer arhitekturu, NNA predstavljen 2017, prvo korišćen za mehanizam prevođenja engleskog teksta u tekst na nemačkom ili francuskom. \
 Sastavljen iz dva modula:\
 	- **enkoder**: procesuira uneti tekst i predstavlja ga u vidi vektora sa numeričkim vrednostima koji predstavlja kontekst teksta.\
@@ -130,7 +128,7 @@ Izgrađeni na ovom konceptu su:
 
 LLM i transformer se danas tretiraju kao sinonimi usled velike zasnovanosti LLM-a na arhitekturi transformera.
  
-## 3.4 Ograničenja LLM-a:
+## 3.2 Ograničenja LLM-a:
 
 1. **Razumevanje konteksta:** Iako LLM-ovi mogu obrađivati veliki broj informacija, često imaju poteškoće sa dubljim razumevanjem konteksta ili složenih apstraktnih veza.
 2. **Pristrasnost:** LLM modeli su često pristrasni jer se oslanjaju na podatke na kojima su trenirani. Ako ti podaci sadrže pristrasnost, i sam model će ih reflektovati.
@@ -141,22 +139,19 @@ LLM i transformer se danas tretiraju kao sinonimi usled velike zasnovanosti LLM-
 Specifična vrsta algoritama koji pripadaju grupi pretrage, a njihov glavni cilj je da pronađu optimalno rešenje za datu ciljnu funkciju, koja može biti minimizacija ili maksimizacija, uz određeni skup ograničenja.
 
 ## 4.1 Osnovni pojmovi:
-- **Funkcija cilja:** Ovo je funkcija koja mapira prostor rešenja (S) u realne brojeve (R). Oblik funkcije može biti (f: S -> R). Kada se govori o minimizaciji, cilj je pronaći takvu vrednost **x** da je f(x) minimalna. U isto vreme, maksimizacija funkcije f može se izraziti kao minimizacija njene negacije, tj. (-f). Ovde **x** predstavlja nezavisne promenljive koje utiču na vrednost funkcije cilja.
-- **Skup ograničenja:** Ovaj skup definiše zavisnosti između nezavisnih promenljivih. Ograničenja mogu biti postavljena na način da definišu dozvoljene vrednosti za promenljive, kao i odnose među njima. Ograničenja mogu biti zasnovana na jednakostima (npr. $g(x) = 0$) i/ili nejednakostima (npr. $h(x) \leq 0$).
+**Funkcija cilja:** Ovo je funkcija koja mapira prostor rešenja (S) u realne brojeve (R). Oblik funkcije može biti (f: S -> R). Kada se govori o minimizaciji, cilj je pronaći takvu vrednost **x** da je f(x) minimalna. U isto vreme, maksimizacija funkcije f može se izraziti kao minimizacija njene negacije, tj. (-f). Ovde **x** predstavlja nezavisne promenljive koje utiču na vrednost funkcije cilja.
+**Skup ograničenja:** Ovaj skup definiše zavisnosti između nezavisnih promenljivih. Ograničenja mogu biti postavljena na način da definišu dozvoljene vrednosti za promenljive, kao i odnose među njima. Ograničenja mogu biti zasnovana na jednakostima (npr. $g(x) = 0$) i/ili nejednakostima (npr. $h(x) \leq 0$).
 
-- **Globalni i lokalni minimumi:** 
-  - **Globalni minimum** je najmanja vrednost funkcije u celokupnom prostoru rešenja. 
-  - **Lokalni minimumi** su minimalne vrednosti funkcije unutar određenih područja prostora rešenja. 
+**Globalni minimum** je najmanja vrednost funkcije u celokupnom prostoru rešenja. 
+**Lokalni minimumi** su minimalne vrednosti funkcije unutar određenih područja prostora rešenja. 
 
 U mnogim slučajevima, algoritmi optimizacije mogu naići na lokalne minimume koji nisu globalni, što može otežati postizanje optimalnog rešenja.
 
 ## 4.2 Optimizacione metode:
 Optimizacione metode imaju za cilj da pronađu optimum u prostoru dozvoljenih rešenja. Rešenja su dozvoljena ako su zadovoljena postavljena ograničenja. 
 
-### 4.2.1 Metode se mogu klasifikovati prema različitim kriterijumima:
-
+**Klasifikacija metoda:**
 1. **Pretraga:** Metode se mogu deliti na **lokalne** i **globalne** metode pretrage. Lokalne metode traže rešenja u blizini trenutnog rešenja, dok globalne metode pretražuju širi prostor rešenja kako bi pronašle najbolja moguća rešenja.
-
 2. **Pristup pretrage:** Postoje **stohastičke** metode (poput Monte Karlo) koje koriste nasumične uzorke da bi istražile prostor rešenja, i **determinističke** metode koje koriste unapred definisane strategije i pravila.
 
 Cesto se koriste kombinacije stohastičkog i determinističkog pristupa.
@@ -174,7 +169,6 @@ kazneni bodovi, što ih čini manje atraktivnim tokom pretrage.
 
 ## 4.4 Prostor rešenja:
 Prostor rešenja u kojem se vrši optimizacija može se podeliti na:
-
 - **Kombinatornu optimizaciju:** Ova vrsta optimizacije se bavi problemima gde je prostor rešenja diskretan (npr. raspoređivanje, putnički problem, itd.).
 - **Globalnu optimizaciju:** Ova metoda se bavi problemima u kojima su rešenja kontinualna i gde se traži najbolja moguća vrednost funkcije cilja u celokupnom prostoru rešenja.
 
@@ -186,12 +180,12 @@ Predstavlja oblast optimizacije koja se fokusira na probleme u kojima je prostor
 U ovom problemu, trgovac treba da obiđe određeni broj gradova tako da se vrati u početni grad, a cilj je minimizirati ukupnu udaljenost ili vreme putovanja.
 
 ### 4.5.1 Opšta formula algoritma pretrage:
-- **Dok nije zadovoljen kriterijum završetka:** 
+**Dok nije zadovoljen kriterijum završetka:** 
 Algoritam se nastavlja dok se ne postigne određeni cilj ili kriterijum.
- 	1. **Izračunaj vrednost:** Prvo se izračunava vrednost funkcije cilja za trenutno rešenje.
-    2. **Izračunaj pravac i smer pretrage:** Na osnovu trenutne vrednosti, određuje se pravac u kojem će se nastaviti pretraga.
-    3. **Izračunaj dužinu koraka pretrage:** Definiše se koliko daleko se ide u odabranom pravcu.
-    4. **Pređi u naredno rešenje:** Na osnovu prethodnih koraka, prelazi se na sledeće rešenje u pretrazi.
+1. **Izračunaj vrednost:** Prvo se izračunava vrednost funkcije cilja za trenutno rešenje.
+2. **Izračunaj pravac i smer pretrage:** Na osnovu trenutne vrednosti, određuje se pravac u kojem će se nastaviti pretraga.
+3. **Izračunaj dužinu koraka pretrage:** Definiše se koliko daleko se ide u odabranom pravcu.
+4. **Pređi u naredno rešenje:** Na osnovu prethodnih koraka, prelazi se na sledeće rešenje u pretrazi.
 
 ### 4.5.2 Višeciljna optimizacija:
 Višeciljna optimizacija se koristi kada je potrebno zadovoljiti više kriterijuma (funkcija). Ovo je posebno važno u složenim situacijama kao što su ekonomija i transportni problemi, gde se često moraju razmatrati različiti faktori, poput troškova, vremena, kapaciteta i kvaliteta usluge.
@@ -249,7 +243,6 @@ Predstavljaju skup opštih metoda koje pružaju okvir za rešavanje optimizacion
 **Penjanje uzbrdo** (eng. Hill Climbing) je tehnika koja se zasniva na **gradijentnom kretanju**. 
 
 Postupak je sledeći:
-
 1. Počnemo sa nekom vrednošću (rešenjem).
 2. Odredimo kvalitet tog rešenja pomoću fitnes funkcije.
 3. Blago promenimo početno rešenje, prelazeći u novu iteraciju, i uporedimo rezultate. Ako je novo rešenje bolje, usvajamo ga kao polaznu tačku za sledeću iteraciju.
@@ -306,17 +299,17 @@ Pogodan region predstavlja prostor rešenja dobijen presecima ograničenja, koji
 ## 6.2 Geometrijski princip rešavanja:
 Za pronalaženje optimalnog rešenja linearna funkcija (npr. ( ax + by = c )) se "pomeranjem" kroz pogodan region (menjanjem vrednosti konstante ( c )) postavlja u najvišu ili najnižu tačku gde dotiče region. Kada funkcija prestane da se pomera unutar ovog prostora, dostigli smo optimalno rešenje.
 
-|Svi uslovi|Dobijen pogodni region|
-|-|-|
-|![](slike/farmerGeometrijski.png)|![](slike/farmerDopustiviRegion.png)|
+| Svi uslovi                        | Dobijen pogodni region               |
+| --------------------------------- | ------------------------------------ |
+| ![](slike/farmerGeometrijski.png) | ![](slike/farmerDopustiviRegion.png) |
 
 Plavo predstavlja ograničenje količine šargarepa, crveno ogranićenje krompira, zeleno da njihov zbir ne prelazi 5000.
 
 Na slici vidimo da je zapravo pogodan region bas presek ove tri boje, racunajuci samo ono u pozitivnom delu.
 
-|Minimum|Neka srednja vrednost|Maksimum|
-|-|-|-|
-|![](slike/minGeom.png)|![](slike/midGeom.png)|![](slike/maxGeom.png)|
+| Minimum                | Neka srednja vrednost  | Maksimum               |
+| ---------------------- | ---------------------- | ---------------------- |
+| ![](slike/minGeom.png) | ![](slike/midGeom.png) | ![](slike/maxGeom.png) |
 
 Pomeranjem funkcije ax + by = c, uvećavanjem konstante c nalazimo maksimum. Minimalno rešenje za c = 0, a maksimum za c = 8000.
 
@@ -334,7 +327,7 @@ Simplex metod optimizuje linearnu funkciju pomerajući se po ivicama pogodne obl
    - Biramo koju s-promenljivu ćemo "zategnuti" na osnovu razmera konstanti u ograničenjima.
    - Ubacujemo dobijenu vrednost promenljive u funkciju i ponavljamo proces dok svi koeficijenti uz promenljive ne postanu negativni.
 
-### 6.3.1 Primer primene simplex algoritma – Farmer:\
+### 6.3.1 Primer primene simplex algoritma – Farmer:
 Farmer može posaditi šargarepu (4 tone) i krompir (3 tone), ima 5 tona đubriva (dakle, može posaditi maksimalno 5 tona povrća). Krompir donosi 1,2 evra po kilogramu, dok šargarepa donosi 1,7 evra. Cilj je maksimizacija profita: \
 1. Definišemo funkciju: f($x_1, x_2$) = 1.7 * $x_1$ + 1.2 * $x_2$, sa ograničenjima:\
 $$x_1 \leq 4000$$\
