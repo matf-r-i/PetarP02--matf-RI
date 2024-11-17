@@ -92,9 +92,9 @@ Ovo su sistemi koji mogu raditi sa nejasnim, nepotpunim ili dvosmislenim informa
 Umesto da koriste striktna pravila kao klasični sistemi, rasplinuti sistemi omogućavaju "sive zone", gde se odluke donose na osnovu verovatnoće ili približnih vrednosti.
 Logika nije strogo binarna (0 ili 1), već vrednosti mogu biti između 0.0 i 1.0. U ovim sistemima, odluke se donose na osnovu stepena pripadnosti određenim skupovima, što omogućava fino podešavanje odluka i ponašanja u situacijama koje nisu strogo definisane. 
 
-|S|Trapez|Trougao|
-|-|-|-|
-|![](slike/sFuzzy.png)|![](slike/trapezFuzzy.png)|![](slike/triangleFuzzy.png)|
+| S                     | Trapez                     | Trougao                      |
+| --------------------- | -------------------------- | ---------------------------- |
+| ![](slike/sFuzzy.png) | ![](slike/trapezFuzzy.png) | ![](slike/triangleFuzzy.png) |
 
 Fazi logika dozvoljava rad sa nepreciznim, nejasnim ili nepotpunim informacijama, simulirajući ljudsko rasuđivanje u takvim uslovima. Koriste se u oblasti kontrole, kao što su pametni termostati ili sistemi za navigaciju.
 
@@ -329,7 +329,7 @@ Simplex metod optimizuje linearnu funkciju pomerajući se po ivicama pogodne obl
    - Ubacujemo dobijenu vrednost promenljive u funkciju i ponavljamo proces dok svi koeficijenti uz promenljive ne postanu negativni.
 
 ### 6.3.1 Primer primene simplex algoritma – Farmer:
-Farmer može posaditi šargarepu (4 tone) i krompir (3 tone), ima 5 tona đubriva (dakle, može posaditi maksimalno 5 tona povrća). Krompir donosi 1,2 evra po kilogramu, dok šargarepa donosi 1,7 evra. Cilj je maksimizacija profita: \
+Farmer može posaditi šargarepu (4 tone) i krompir (3 tone), ima 5 tona đubriva (dakle, može posaditi maksimalno 5 tona povrća). Krompir donosi 1,2 evra po kilogramu, dok šargarepa donosi 1,7 evra. Cilj je maksimizacija profita: 
 1. Definišemo funkciju: f($x_1, x_2$) = 1.7 * $x_1$ + 1.2 * $x_2$, sa ograničenjima:\
 $$x_1 \leq 4000$$\
 $$x_2 \leq 3000$$\
@@ -358,5 +358,54 @@ Kod linearnih programa, poželjno je koristiti veće brojeve za izražavanje vre
 
 Postoji i prošireni pristup poznat kao **Integer Linear Programming (ILP)**, koji dozvoljava samo celobrojne vrednosti, što može biti korisno u praktičnim situacijama gde su delimična rešenja nemoguća.
 
+**Dualni problem**: Od prethodno postavljenog problema pravimo novi koji nam daje gornje ograničenje rešenja (koliko maksimalno para možemo da dobijemo a da su uslovi ispunjeni), rešenje dualnog problema će dati isto rešenje kao prvo postavljen problem.
+
+Za gore navedena ograničenja tražimo takvo $y_1$, $y_2$ i $y_3$ da kada pomnože redom ograničenja dobijemo vrednosti koje u zbiru nam govore da tražena maksimalna vrednost ne može biti veca od dobijene. Moraju biti nenegativni, i posmatrajući ograničenja predstavljamo $x_1$ preko $y_1$ + $y_3$ $\geq$ 1.2 pošto je to baš vrednost koja stoji pored $x_1. Slično za $x_2$ pravimo novo ograničenje $y_2$ + $y_3$ $\geq$ 1.7. 
+Ovo su nam nova ograničenja a funkciju više ne želimo da maksimizujemo vež minimizujemo i ona menja oblik: min(3000 * $y_1$ + 4000 * $y_2$ + 5000 * $y_3$).
+
 # 7. Celobrojno programiranje (ILP):
+
+Šta ako se bavimo izradom stolica i stolova, koristeći gore LP način možemo da dobijemo rešenje koje nam donosi maksimalan profit ali izradom pola stolice.... Ovo nema smisla, zbog toga postoji celebrojno programiranje (**Integer linear prograimmng**) koje ograničava da su rešenja u skupu prirodnih brojeva.
+
+## 7.1 Pogodan region ILP (ILP Feasable region):
+
+Rešavamo problem stolica i stolova, imamo da stolice vrede 20, stolovi 50. Izrada stolica troši 10 jedinica drveta, a stolova 15, vremenski stolice se prave 2 sata a stolovi 5 sati. Koja je maksimalna zarada ako imamo 15 sati i 60 jedinica drveta za izradu.  
+
+Grafički prikaz bi bio sličan kao za LP, prvo predstavimo feasable region kao da su dopuštena realna rešenja, nakon čega dodajemo ograničenje celobrojnih brojeva.
+
+| LP ograničenja               | LP Fesable region               | ILP Fesable region               |
+| ---------------------------- | ------------------------------- | -------------------------------- |
+| ![](slike/LPOgranicenje.png) | ![](slike/LPFeasableRegion.png) | ![](slike/ILPFeasableRegion.png) |
+
+Tačke predstavljaju sva dopuštena rešenja.
+
+Ukoliko rešavamo problem koji sadrži i paramtere koji moraju biti celobrojni i parametara koji smeju imati realne vrednosti ovo se idalje naziva ILP.
+
+## 7.2 Geometrijski princip rešavanja ILP:
+
+Predstavimo funkciju koju želimo da maksimizujemo kao f($x_1$, $x_2$) = c, gde je c konstanta, i samo prevlačimo funkciju po regionu dok ne dotaknemo poslednu pogodnu tačku.
+
+U našem primeru ova funkcija je $20 * x_1 + 50 * x_2 = c$
+
+| Minimum               | Neka srednja vrednost | Maksimum              |
+| --------------------- | --------------------- | --------------------- |
+| ![](slike/ILPmin.png) | ![](slike/ILPmid.png) | ![](slike/ILPmax.png) |
+
+Maksimalnu zaradu dostižemo kada napravimo 3 stola i ni jednu stolicu, zarada je 150.
+
+### 7.3.1 Problem ranca:
+Imamo 8 različitih objekata svaki ima svoju težinu (4, 2, 8, 3, 7, 5, 9, 6) i vrednost (19, 17, 30, 13, 25, 29, 23, 10). Imamo ranac koji može da nosi maksimalno 17kg. Naš zadatak je da nađemo maksimalnu  zaradu, ali da ne pređemo ograničenje težine koju ranac može da nosi.
+
+Za ovaj problem možemo da koristimo binarne promenljive (jesmo li uzeli ili ne objekat).
+Postavka zadatka je sledeća:
+1. Ograničavamo svaku promenljivu da može biti 1 ili 0 koristeći sledeća dva ograničenja:
+$$0 \leq o_1$$ $$o_2 \leq 1$$
+	Istu stvar bi uradili za svaki objekat:
+	$$0 \leq o_1, o_2, o_3, o_4, o_5, o_6, o_7, o_8 \leq 1$$
+1. Pišemo ostala ograničenja kao što bi inače pisali u LP:
+	Ograničenje težine:
+	$$4 * o_1 + 2 * o_2 + 8 * o_3 + 3 * o_4 + 7 * o_5 + 5 * o_6 + 9 * o_7 + 6 * o_8 \leq 17$$
+3. I konačno funkcija koju želimo da maksimizujemo:
+	max($19 * o_1 + 17 * o_2 + 30 * o_3 + 13 * o_4 + 25 * o_5 + 29 * o_6 + 23 * o_8 + 10 * o_8$)
+	Radi lepšeg ispisa možemo zameniti sve ove promenljive vektorima.
 
