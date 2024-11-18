@@ -409,7 +409,7 @@ Postavka zadatka je sledeća:
 	Radi lepšeg ispisa možemo zameniti sve ove promenljive vektorima.
 
 
-# 8.  Metaheuristika:
+# 8. Metaheuristike:
 
 **Heuristika** je metod koji "navodi" algoritam ka potencijalno dobrom rešenju, bez garancije da će pronaći optimalno rešenje. Ovi pristupi često služe za rešavanje problema gde je kompletna pretraga prostora rešenja nepraktična zbog vremenskih ili računarskih ograničenja.
 
