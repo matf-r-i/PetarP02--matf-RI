@@ -153,9 +153,8 @@ Optimizacione metode imaju za cilj da pronađu optimum u prostoru dozvoljenih re
 
 **Klasifikacija metoda:**
 1. **Pretraga:** Metode se mogu deliti na **lokalne** i **globalne** metode pretrage. Lokalne metode traže rešenja u blizini trenutnog rešenja, dok globalne metode pretražuju širi prostor rešenja kako bi pronašle najbolja moguća rešenja.
-2. **Pristup pretrage:** Postoje **stohastičke** metode (poput Monte Karlo) koje koriste nasumične uzorke da bi istražile prostor rešenja, i **determinističke** metode koje koriste unapred definisane strategije i pravila.
-
-Cesto se koriste kombinacije stohastičkog i determinističkog pristupa.
+2. **Pristup pretrage:** Postoje **stohastičke** metode (poput Monte Karlo) koje koriste nasumične uzorke da bi istražile prostor rešenja, i **determinističke** metode koje koriste unapred definisane strategije i pravila. 
+	Cesto se koriste kombinacije stohastičkog i determinističkog pristupa.
 
 ## 4.3 Ograničenja:
 Ograničenja u optimizaciji mogu se primenjivati na sledeće načine:
@@ -387,7 +386,7 @@ Predstavimo funkciju koju želimo da maksimizujemo kao f($x_1$, $x_2$) = c, gde 
 
 U našem primeru ova funkcija je $20 * x_1 + 50 * x_2 = c$
 
-| Minimum               | Neka srednja vrednost | Maksimum              |
+| Min                   | Mid                   | Max                   |
 | --------------------- | --------------------- | --------------------- |
 | ![](slike/ILPmin.png) | ![](slike/ILPmid.png) | ![](slike/ILPmax.png) |
 
@@ -409,3 +408,81 @@ Postavka zadatka je sledeća:
 	max($19 * o_1 + 17 * o_2 + 30 * o_3 + 13 * o_4 + 25 * o_5 + 29 * o_6 + 23 * o_8 + 10 * o_8$)\
 	Radi lepšeg ispisa možemo zameniti sve ove promenljive vektorima.
 
+
+# 8.  Metaheuristika:
+
+**Heuristika** je metod koji "navodi" algoritam ka potencijalno dobrom rešenju, bez garancije da će pronaći optimalno rešenje. Ovi pristupi često služe za rešavanje problema gde je kompletna pretraga prostora rešenja nepraktična zbog vremenskih ili računarskih ograničenja.
+
+**Metaheuristike** (meta - apstrakcija) su generalizovane heuristike koje se primenjuju na širi spektar problema, pružajući okvir za rešavanje sličnih problema. One koriste apstraktne principe koji mogu da se prilagode specifičnostima konkretnog problema i time "navedu" pretragu u dobrom smeru. Dakle: 
+1. Nisu specifične za dati problem već skup problema
+2. Podpomaže algoritmu da se ne zaglavi na lokalnim rešenjima i time efikasnije istraže prostor rešenja
+3. Nisu determinističke
+
+Primeri metaheuristika su: Genetski algoritmi (GA), Simulirano kaljenje (Simulated annealing), Optimizacija kolonije mrava (Ant colony optimization ACO), Optimizacija grupe čestica (Partical sworm optimization PSO), Variable neighborhood search (VNS) ...
+
+Kako metaheuristike nemaju ideju o kvalitetu rešenja uglavnom se zaustavljaju na osnovu nekih spoljašnjih faktora (kao što su vreme rada algoritma ili broj iteracija). 
+Kako nisu rešenja egzaktnog problema uglavnom se koriste u kombinaciji sa egzaktnim problemima.
+
+Relativno je nova oblast koja nije bazirana ni na jednom dokazu,  teoremi.
+
+Metaheuristike na osnovu broja rešenja dele se na:
+1. **S-Metaheuristike (S - Single)** - algoritam se vrši nad jednim rešenjem koje unapređujemo vremenom. (VNS, Simulated annealing, gradijent ...)
+2. **P-Metaheuristike (P - Population)* - algoritam se bavi populacijom rešenja gde svaka jedinka se kreće ka rešenju. (GA, ACO, PSO ...)
+
+## 8.1 Trajectory methods (S - Metaheuristics):
+U ovu grupu spadaju sve one metaheuristike koje se bave jednim rešenjem koje unapređuju vremenom.
+
+Jedan od poznatih metaheuristika ovog tipa jeste VNS ili Variable neighborhood search, koji funkcioniše po sledećem principu:
+1. Izabere neko pseudo nasumično rešenje
+2. Odredi njegov kvalitet
+3. Vršimo **Shake** operaciju koja od našeg sadašnjeg rešenja pravi nova rešenja u njegovoj okolini. 
+	- prvo se predstavljaju sva rešenja dobijena izmenom jednog parametra prethodnog rešenja
+	- ukoliko nije nađeno bolje rešenje povećavamo broj parametara koji smeju da se izmene i ponavljamo prethodni korak
+	- ukoliko smo našli bolje rešenje, ili više nemamo parametre koje možemo da izmenimo, prekidamo postupak
+4. Sada bolje dobijeno rešenje, ukoliko je takvo nađeno, postavljamo kao novo optimalno rešenje i ovaj postupak ponavljamo dok ne istekne broj iteracija ili neko vremensko ograničenje.
+
+**Primer**: tražimo $x$ za koje funkcija (slika Funkcija) dostiže minimum. Kako se ovde bavimo jednom promenljivom shake funkcija ce biti malo drugačija, ali ideja je slična. 
+Funkciju **Shake** možemo predstaviti kao funkciju koja pravi od našeg trenutnog rešenja $x_{local}$ dva rešenja $x_{left}$ i $x_{right}$ koji se izračunavaju kao:
+$$x_{left} = x_{local} - value$$
+$$x_{right} = x_{local} + value$$
+a $value$ je vrednost koja za svako novo shake-ovanje ima redom vrednosti ${0.2, 0.4, 0.8, 1.6, 2.4}$. 
+Izaberimo neku nasumičnu tačku $x_{local} = 0.8$:
+
+| Funkcija                    | $x_{local}$                 |
+| --------------------------- | --------------------------- |
+| ![ ](slike/funkcijaVNS.png) | ![](slike/prvaTackaVNS.png) |
+
+Prve okoline su nam $x_{left} = 0.6, x_{right} = 1.0$, pronalazimo da je vrednost u tački $x_{left}$ manje od trenutnog $x_{local}$ tako da uzimamo to rešenje kao novi optimum:
+
+![](slike/drugaTackaVNS.png)
+
+Sada posmatramo okolinu nove tačke $x_{local} = 0.6$, u okolini ove tačke prve dve vrednosti dobijene shake-om $x_{left} = 0.4, x_{right} = 0.8$ ni jedna nije novi optimum, ponavljamo shake,
+$x_{left} = 0.2, x_{right} = 1.0$ ponovo nijedno rešenje nije bolje, prvo poboljšanje se dešava za $value = 2.5$ kada dobijamo da je $x_{right} = 3.0$:
+
+| Prva okolina             | Treća okolina            | Peta okolina             |
+| ------------------------ | ------------------------ | ------------------------ |
+| ![](slike/shake1VNS.png) | ![](slike/shake2VNS.png) | ![](slike/shake3VNS.png) |
+Dalje se isti postupak ponavlja dok ne dođemo do konačnog rešenja kada više ne možemo više da poboljšamo rešenje ili nam je ponestalo iteracija.
+
+| Iteracija 2             | Iteracija 6           | Iteracija 7            |
+| ----------------------- | --------------------- | ---------------------- |
+| ![](slike/trecaVNS.png) | ![](slike/midVNS.png) | ![](slike/krajVNS.png) |
+
+U ovom primeru imali smo sreće prilikom odabira svake sledeće okoline, ali da nismo dodali okolinu $2.4$ ovaj algoritam bi stao već nakon druge tačke.
+
+Koristeći VNS mogli bi da rešimo i problem ranca, jedina razlika bi bila u predstavljanju rešenja: kao niz bitova, a funkcija shake-ovanja bi bila implementirana kao sve kombinacije kada negiramo 1, 2, 3...n bitova gde je n broj objekata koje možemo odabrati.
+
+Na osnovu toga vidimo da je VNS zaista metaheuristika.
+
+## 8.2 Population-based (P - Metaheuristika):
+U ovu grupu spadaju sve one metaheuristike koje e bave unapređivanjem više rešenja njihovim simultanim evoluiranjem.
+
+Primer ovakvih algoritama je algoritam jata ptica (Bird flocking PSO), funkcioniše po sledećem principu:
+1. Izaberemo pseudo nasumično **n** rešenja, svako rešenje predstavlja pticu u prostoru rešenja koja se kreće ka optimalnom rešenju
+2. Rešenja međusobno komuniciraju i prilagođavaju svoju putanju na sonovu:
+	- svoje najbolje pozicije 
+	- najbolje pozicije grupe 
+	- inercije
+3. Vremenom rešenja konvergira ka najboljem rešenju, a iscrtavanjem ovog algoritma rešenja izgledaju kao jato pica.
+
+# 9. Evolutivna izračunavanja:
