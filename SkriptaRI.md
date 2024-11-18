@@ -427,7 +427,7 @@ Relativno je nova oblast koja nije bazirana ni na jednom dokazu,  teoremi.
 
 Metaheuristike na osnovu broja rešenja dele se na:
 1. **S-Metaheuristike (S - Single)** - algoritam se vrši nad jednim rešenjem koje unapređujemo vremenom. (VNS, Simulated annealing, gradijent ...)
-2. **P-Metaheuristike (P - Population)* - algoritam se bavi populacijom rešenja gde svaka jedinka se kreće ka rešenju. (GA, ACO, PSO ...)
+2. **P-Metaheuristike (P - Population)** - algoritam se bavi populacijom rešenja gde svaka jedinka se kreće ka rešenju. (GA, ACO, PSO ...)
 
 ## 8.1 Trajectory methods (S - Metaheuristics):
 U ovu grupu spadaju sve one metaheuristike koje se bave jednim rešenjem koje unapređuju vremenom.
@@ -462,6 +462,7 @@ $x_{left} = 0.2, x_{right} = 1.0$ ponovo nijedno rešenje nije bolje, prvo pobol
 | Prva okolina             | Treća okolina            | Peta okolina             |
 | ------------------------ | ------------------------ | ------------------------ |
 | ![](slike/shake1VNS.png) | ![](slike/shake2VNS.png) | ![](slike/shake3VNS.png) |
+
 Dalje se isti postupak ponavlja dok ne dođemo do konačnog rešenja kada više ne možemo više da poboljšamo rešenje ili nam je ponestalo iteracija.
 
 | Iteracija 2             | Iteracija 6           | Iteracija 7            |
