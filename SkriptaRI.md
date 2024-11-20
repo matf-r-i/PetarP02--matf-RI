@@ -30,7 +30,7 @@ Ove mreže oponašaju način na koji ljudski mozak obrađuje informacije, korist
 
 Ovi koncepti i alati su ključni za razumevanje savremenih tehnika veštačke inteligencije i mašinskog učenja, posebno u kontekstu njihovih praktičnih primena i sposobnosti.
 
-![](slike/neuronANN.png)
+![](slike/paradigme/neuronANN.png)
 
 ## 2.2 Evolutivna izračunavanja (EC)
 Evolutivna izračunavanja su metoda optimizacije zasnovana na simulaciji prirodne selekcije, gde se jedinke koje su bolje prilagođene okruženju "preživljavaju" i prenose svoje "gene" (karakteristike) na sledeće generacije. Oni koji se lošije prilagode ne prenose svoje gene, što omogućava da populacija u celini postane bolja vremenom. Rekombinacija gena preživelih jedinki stvara nova rešenja, simulirajući prirodni evolucioni proces. Na ovaj način, evolutivni algoritmi "uče" kroz generacije kako da dođu do optimalnog rešenja za zadati problem.
@@ -47,7 +47,7 @@ Genetski algoritmi su najpoznatija forma evolutivnih izračunavanja i funkcioni�
 - **Ukrštanje (Crossover):** Dva roditeljska rešenja se kombinuju da bi se kreirala nova rešenja.
 - **Mutacija:** Nasumična promena vrednosti unutar rešenja, koja obezbeđuje raznolikost i izbegava lokalne minimume.
 
-![](slike/GA.png)
+![](slike/paradigme/GA.png)
 
 ### 2.2.2 Genetsko programiranje (GP):
 Genetsko programiranje je posebna vrsta evolutivnog algoritma koja ne evoluira nizove brojeva ili binarne kodove kao u genetskim algoritmima, već evoluira **programe**. Svaki jedinka je računski program koji se optimizuje kroz generacije. Cilj je stvoriti program koji na najbolji način rešava zadati problem. Kroz generacije, GP koristi rekombinaciju, mutacije i selekciju kako bi kreirao sve efikasnije programe.
@@ -92,9 +92,9 @@ Ovo su sistemi koji mogu raditi sa nejasnim, nepotpunim ili dvosmislenim informa
 Umesto da koriste striktna pravila kao klasični sistemi, rasplinuti sistemi omogućavaju "sive zone", gde se odluke donose na osnovu verovatnoće ili približnih vrednosti.
 Logika nije strogo binarna (0 ili 1), već vrednosti mogu biti između 0.0 i 1.0. U ovim sistemima, odluke se donose na osnovu stepena pripadnosti određenim skupovima, što omogućava fino podešavanje odluka i ponašanja u situacijama koje nisu strogo definisane. 
 
-| S                     | Trapez                     | Trougao                      |
-| --------------------- | -------------------------- | ---------------------------- |
-| ![](slike/sFuzzy.png) | ![](slike/trapezFuzzy.png) | ![](slike/triangleFuzzy.png) |
+| S                               | Trapez                               | Trougao                                |
+| ------------------------------- | ------------------------------------ | -------------------------------------- |
+| ![](slike/paradigme/sFuzzy.png) | ![](slike/paradigme/trapezFuzzy.png) | ![](slike/paradigme/triangleFuzzy.png) |
 
 Fazi logika dozvoljava rad sa nepreciznim, nejasnim ili nepotpunim informacijama, simulirajući ljudsko rasuđivanje u takvim uslovima. Koriste se u oblasti kontrole, kao što su pametni termostati ili sistemi za navigaciju.
 
@@ -299,17 +299,17 @@ Pogodan region predstavlja prostor rešenja dobijen presecima ograničenja, koji
 ## 6.2 Geometrijski princip rešavanja:
 Za pronalaženje optimalnog rešenja linearna funkcija (npr. ( ax + by = c )) se "pomeranjem" kroz pogodan region (menjanjem vrednosti konstante ( c )) postavlja u najvišu ili najnižu tačku gde dotiče region. Kada funkcija prestane da se pomera unutar ovog prostora, dostigli smo optimalno rešenje.
 
-| Svi uslovi                        | Dobijen pogodni region               |
-| --------------------------------- | ------------------------------------ |
-| ![](slike/farmerGeometrijski.png) | ![](slike/farmerDopustiviRegion.png) |
+| Svi uslovi                           | Dobijen pogodni region                  |
+| ------------------------------------ | --------------------------------------- |
+| ![](slike/LP/farmerGeometrijski.png) | ![](slike/LP/farmerDopustiviRegion.png) |
 
 Plavo predstavlja ograničenje količine šargarepa, crveno ogranićenje krompira, zeleno da njihov zbir ne prelazi 5000.
 
 Na slici vidimo da je zapravo pogodan region bas presek ove tri boje, racunajuci samo ono u pozitivnom delu.
 
-| Minimum                | Neka srednja vrednost  | Maksimum               |
-| ---------------------- | ---------------------- | ---------------------- |
-| ![](slike/minGeom.png) | ![](slike/midGeom.png) | ![](slike/maxGeom.png) |
+| Min                       | Mid                       | Max                       |
+| ------------------------- | ------------------------- | ------------------------- |
+| ![](slike/LP/minGeom.png) | ![](slike/LP/midGeom.png) | ![](slike/LP/maxGeom.png) |
 
 Pomeranjem funkcije ax + by = c, uvećavanjem konstante c nalazimo maksimum. Minimalno rešenje za c = 0, a maksimum za c = 8000.
 
@@ -372,9 +372,9 @@ Rešavamo problem stolica i stolova, imamo da stolice vrede 20, stolovi 50. Izra
 
 Grafički prikaz bi bio sličan kao za LP, prvo predstavimo feasable region kao da su dopuštena realna rešenja, nakon čega dodajemo ograničenje celobrojnih brojeva.
 
-| LP ograničenja               | LP Fesable region               | ILP Fesable region               |
-| ---------------------------- | ------------------------------- | -------------------------------- |
-| ![](slike/LPOgranicenje.png) | ![](slike/LPFeasableRegion.png) | ![](slike/ILPFeasableRegion.png) |
+| LP ograničenja                   | LP Fesable region                   | ILP Fesable region                   |
+| -------------------------------- | ----------------------------------- | ------------------------------------ |
+| ![](slike/ILP/LPOgranicenje.png) | ![](slike/ILP/LPFeasableRegion.png) | ![](slike/ILP/ILPFeasableRegion.png) |
 
 Tačke predstavljaju sva dopuštena rešenja.
 
@@ -386,9 +386,9 @@ Predstavimo funkciju koju želimo da maksimizujemo kao f($x_1$, $x_2$) = c, gde 
 
 U našem primeru ova funkcija je $20 * x_1 + 50 * x_2 = c$
 
-| Min                   | Mid                   | Max                   |
-| --------------------- | --------------------- | --------------------- |
-| ![](slike/ILPmin.png) | ![](slike/ILPmid.png) | ![](slike/ILPmax.png) |
+| Min                       | Mid                       | Max                       |
+| ------------------------- | ------------------------- | ------------------------- |
+| ![](slike/ILP/ILPmin.png) | ![](slike/ILP/ILPmid.png) | ![](slike/ILP/ILPmax.png) |
 
 Maksimalnu zaradu dostižemo kada napravimo 3 stola i ni jednu stolicu, zarada je 150.
 
@@ -448,26 +448,24 @@ $$x_{right} = x_{local} + value$$
 a $value$ je vrednost koja za svako novo shake-ovanje ima redom vrednosti ${0.2, 0.4, 0.8, 1.6, 2.4}$. 
 Izaberimo neku nasumičnu tačku $x_{local} = 0.8$:
 
-| Funkcija                    | $x_{local}$                 |
-| --------------------------- | --------------------------- |
-| ![ ](slike/funkcijaVNS.png) | ![](slike/prvaTackaVNS.png) |
+| Funkcija                                       | Tačka $x_{local}$                              | Iteracija 1                                     |
+| ---------------------------------------------- | ---------------------------------------------- | ----------------------------------------------- |
+| ![ ](slike/Metaheuristike/VNS/funkcijaVNS.png) | ![](slike/Metaheuristike/VNS/prvaTackaVNS.png) | ![](slike/Metaheuristike/VNS/drugaTackaVNS.png) |
 
 Prve okoline su nam $x_{left} = 0.6, x_{right} = 1.0$, pronalazimo da je vrednost u tački $x_{left}$ manje od trenutnog $x_{local}$ tako da uzimamo to rešenje kao novi optimum:
-
-![](slike/drugaTackaVNS.png)
 
 Sada posmatramo okolinu nove tačke $x_{local} = 0.6$, u okolini ove tačke prve dve vrednosti dobijene shake-om $x_{left} = 0.4, x_{right} = 0.8$ ni jedna nije novi optimum, ponavljamo shake,
 $x_{left} = 0.2, x_{right} = 1.0$ ponovo nijedno rešenje nije bolje, prvo poboljšanje se dešava za $value = 2.5$ kada dobijamo da je $x_{right} = 3.0$:
 
-| Prva okolina             | Treća okolina            | Peta okolina             |
-| ------------------------ | ------------------------ | ------------------------ |
-| ![](slike/shake1VNS.png) | ![](slike/shake2VNS.png) | ![](slike/shake3VNS.png) |
+| Prva okolina                                | Treća okolina                               | Peta okolina                                |
+| ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| ![](slike/Metaheuristike/VNS/shake1VNS.png) | ![](slike/Metaheuristike/VNS/shake2VNS.png) | ![](slike/Metaheuristike/VNS/shake3VNS.png) |
 
 Dalje se isti postupak ponavlja dok ne dođemo do konačnog rešenja kada više ne možemo više da poboljšamo rešenje ili nam je ponestalo iteracija.
 
-| Iteracija 2             | Iteracija 6           | Iteracija 7            |
-| ----------------------- | --------------------- | ---------------------- |
-| ![](slike/trecaVNS.png) | ![](slike/midVNS.png) | ![](slike/krajVNS.png) |
+| Iteracija 2                                | Iteracija 6                              | Iteracija 7                               |
+| ------------------------------------------ | ---------------------------------------- | ----------------------------------------- |
+| ![](slike/Metaheuristike/VNS/trecaVNS.png) | ![](slike/Metaheuristike/VNS/midVNS.png) | ![](slike/Metaheuristike/VNS/krajVNS.png) |
 
 U ovom primeru imali smo sreće prilikom odabira svake sledeće okoline, ali da nismo dodali okolinu $2.4$ ovaj algoritam bi stao već nakon druge tačke.
 
