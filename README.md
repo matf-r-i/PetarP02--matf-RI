@@ -10,5 +10,6 @@ Neki materijali za kurs Računarske inteligencije, četvrte godine Matematičkog
 6. [Linearno programiranje (LP)](SkriptaRI.md/#6-linearno-programiranje-lp)
 7. [Celobrojno programiranje (ILP)](SkriptaRI.md/#7-celobrojno-programiranje-ilp) - u izradi
 8. [Metaheuristike](SkriptaRI.md/#8-metaheuristike) - u izradi
+9. [Evolutivna izračunavanja](SkriptaRI.md/#9-evolutivna-izračunavanja) - u izradi
 
 Skripta pisana u Obsidian-u.

@@ -549,9 +549,10 @@ Postoje dva osnovna pristupa selekciji:
 	- k < n: najbolji pristup, pošto i one dobre i one loše jedinke imaju šansu da budu izabrane.
 	- k = n: u ovom slučaju uvek će biti izabrane one jedinke koje su najbolje u celoj populaciji, pa će se uniformna populacija steći jako brzo.
 1. **Rulet**:
-	Zamišljamo ruletski točak gde je svaka pozicija u koju loptica može da upadne jedna jedinka. Veličina pozicije za svaku jedinku je proporcijalna fitness vrednosti jedinke, ovo pretstavlja verovatnoću njenog odabira. Kako verovatnoća svih mogućih događaja mora da bude jednaka 1, moramo normalizovati sve verovatnoće. 
-	Pa u populaciji sa $n$ jedinki, za svaku jedinku računamo njenu verovatnoću:
-	$$p_x = \dfrac{f_x}{\sum_{i = 1}^n f_i}$$
+	Zamišljamo ruletski točak gde je svaka pozicija u koju loptica može da upadne jedna jedinka. 
+	Veličina pozicije za svaku jedinku je proporcijalna fitness vrednosti jedinke, ovo pretstavlja verovatnoću njenog odabira. Kako verovatnoća svih mogućih događaja mora da bude jednaka 1, moramo normalizovati sve verovatnoće. 
+	Pa u populaciji sa $n$ jedinki, za svaku jedinku računamo njenu verovatnoću:\
+	$$p_x = \dfrac{f_x}{\sum_{i = 1}^n f_i}$$\
 	Ovakav način selekcije nije najbolji, jer kako one jedinke koje imaju bolji fitness imaju veće šanse da budu odabrane, one lošije jedinke će ređe biti odabrane.
 	Možda baš te lošije jedinke imaju neki gen koji nam je potreban u nekoj drugoj jedinci da bi dobili bolje rešenje.
 
