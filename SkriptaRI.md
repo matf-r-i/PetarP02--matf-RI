@@ -485,3 +485,102 @@ Primer ovakvih algoritama je algoritam jata ptica (Bird flocking PSO), funkcioni
 3. Vremenom rešenja konvergira ka najboljem rešenju, a iscrtavanjem ovog algoritma rešenja izgledaju kao jato pica.
 
 # 9. Evolutivna izračunavanja:
+Evolutivno izračunavanje predstavlja proces poboljšavanja organizama ili sistema kroz takmičarsko okruženje, gde se najuspešnije jedinke prilagođavaju i prenose svoje karakteristike na buduće generacije. Poznati kao **Evolutivni algoritmi**.
+**Evolutivni algoritmi (EA)** pripadaju **P-Metaheuristici**.
+
+Očigledno inspirisano nekim istorijskim idejama o evoluciji:
+- **Lamarkov pristup** - Organizmi mogu nasleđivati karakteristike stečene tokom života (npr. fizičke promene izazvane okruženjem).
+- **Darvinov pristup** - Evolucija se odvija kroz prirodnu selekciju, gde samo najprilagođenije jedinke ("survival of the fittest") opstaju, dok se njihove karakteristike propagiraju kroz populaciju ukrštanjem i mutacijom.
+
+### **Osnovni pojmovi:**
+1. **Hromozom/Jedinka** - kodirano rešenje, uglavnom pseudo nasumično generisano, uglavnom u vidu niza bitova i slično. (kod genetskog programiranja GP, rešenja mogu biti stabla)
+2. **Populacija **- skup više hromozoma
+3. **Selekcija** - odabir jedinki koje će graditi sledeću generaciju
+4. **Ukrštanje (Crossover)** - mešanje hromozoma neke dve jedinke
+5. **Mutacija** - stohastička izmena delova hromozoma u nadi da izmene dodaju neke inovacije u populaciju
+
+### **Pseudokod EA:**
+ - **generiši inicijalnu populaciju** $P_{0}(n)$
+ - **while** nisu zadovoljeni uslovi:
+	- izračunaj **fitness** za svaku jedinku u $P_{t}(n)$
+	- koristeći **crossover** napravi novu generaciju $P_{t+1}(n)$
+	- pređu u sledeću generaciju $t = t + 1$
+- **end**
+
+Algoritam se završava ukoliko dođe do maksimalnog broja iteracija $t_{max}$, nađemo neko optimalno rešenje, nađemo rešenje i slično.
+
+### **Algoritmi zasnovani na EA:**
+1. **Genetski algoritmi GA** - genetski kod u obliku niza bitova
+2. **Genetsko programiranje GP** - genetski kod u obliku stabla
+3. **Evolutivno programiranje EP** - koristi samo mutaciju prilikom pravljenja sledeće generacije
+4. **Evolutivne strategije ES** - gradi novu privremenu populaciju (drugačije veličine u odnosu na prethodnu generaciju), nad njom vrši ukrštanje i mutaciju i tek onda rangira sva rešenja i na osnovu njih gradi populaciju $P_{t+1}$. Rešenja u obliku niza realnih brojeva.
+5. **Diferencijalna evolucija DE** - ne koristi optimizaciju gradijenta, pa funkcije ne moraju biti neprekidne ili diferencijabilne, već za svaku jedinku bira približne tri tačke a, b i c nasumično, koje ne smeju biti iste, i gradi novu tačku po formuli $x_{new} = a + F \times (v - c)$.
+6. **Kulturna evolucija (CA)** - pored populacije sadrži dodatnu komponentu **belief space**, ta verovanja jedinke prihvataju ali i utiču na populaciju
+7. **Koevolucija** - ne postoji evaluacija rešenja, već su rešenja ograničenja nekim drugim populacijma i njihovim ponašanjima.
+
+### Kodiranje (hromozomi):
+U prirodi hromozomi predstavljaju ceo DNK neke jedinke prilikom deobe ćelije. 
+Svaki hromozom je sačinjen od velikog broja gena koji predstavljaju upustva za sintezu proteina, a proteini određuju anatomiju i fiziologiju organizma.
+
+U kontekstu EA hromozomi su rešenja problema, a pojedini geni su karakteristike rešenja.
+
+Kodiranje je uglavnom u obliku niza, može biti, kao u GP, nelinearno u obliku drveta.
+Klasični primer je binarni vektor fiksne dužine.
+
+![](slike/EA/kodiranjeBitovi.png)
+
+Čuveni problem **trgovačkog putnika** možemo rešiti koristeći kod koji sadrži nasumičnu permutaciju gradova, što je ukupna dužina ovakve permutacije manja to je vrednost fitness funkcije veća.  **Mutacija** može biti swapovanje neka dva grada.
+
+### Fitness funkcija:
+Prema Darvinovom modelu jedinke sa najboljim karakteristikama preživljavaju i dobijaju priliku da svoje gene prpagiraju u sledeću generaciju.
+Kvantifikator ovakvih karakteristika u EA rešavamo **fitness** funkcijom,  uglavnom predstavlja baš funkciju cilja.
+
+### Selekcija:
+Faza u kojoj se se dešava odabir potomka. Ideja je da se onim boljim rešenjima da veća šansa da propagiraju svoje gene.
+
+**Selekcioni pritisak** - predstavlja koliko vremena je potrebno da najbolje jedinke izgrade uniformnu populaciju. 
+Pa bi najniži selekcioni pritisak bio da izmešamo populaciju i nasumično biramo jedinke.
+
+Postoje dva osnovna pristupa selekciji:
+1. **Turnir**:
+	Ideja ovog pristupa jeste da izaberemo neki deo populacije, jedinke tog izabranog dela rangiramo, prema fitness-u, i izaberemo dve najbolje jedinke.
+	U zavisnosti od veličine izabranog broja jedinki za turnir (k), koji može biti jednak ili manji od veličine populacije (n), imamo sledeće ishode:
+	- k = 1: praktično je nasumičan odabir jedinki za crossover.
+	- k < n: najbolji pristup, pošto i one dobre i one loše jedinke imaju šansu da budu izabrane.
+	- k = n: u ovom slučaju uvek će biti izabrane one jedinke koje su najbolje u celoj populaciji, pa će se uniformna populacija steći jako brzo.
+1. **Rulet**:
+	Zamišljamo ruletski točak gde je svaka pozicija u koju loptica može da upadne jedna jedinka. Veličina pozicije za svaku jedinku je proporcijalna fitness vrednosti jedinke, ovo pretstavlja verovatnoću njenog odabira. Kako verovatnoća svih mogućih događaja mora da bude jednaka 1, moramo normalizovati sve verovatnoće. 
+	Pa u populaciji sa $n$ jedinki, za svaku jedinku računamo njenu verovatnoću:
+	$$p_x = \dfrac{f_x}{\sum_{i = 1}^n f_i}$$
+	Ovakav način selekcije nije najbolji, jer kako one jedinke koje imaju bolji fitness imaju veće šanse da budu odabrane, one lošije jedinke će ređe biti odabrane.
+	Možda baš te lošije jedinke imaju neki gen koji nam je potreban u nekoj drugoj jedinci da bi dobili bolje rešenje.
+
+![](slike/EA/rouletteTournament.png)
+
+## 9.1 Genetski algoritmi (GA):
+Glavna primena u diskretnom domenu. 
+Mada su spori, ovi algoritmi su odlični za rešavanje kombinaornih problema.
+
+### Pseudokod GA:
+- **while** nije zadovoljen uslov:
+	- odaberi roditelje 
+	- uradi **crossover** i **mutation**
+	- napravi $P_{t+1}$
+- **end**
+
+U osnovnom algoritmu GA ili SGA (Simple GA) čiji je pseudokod dat, selekcija roditelja se vrši tako što razbacama roditelje i za svaka dva imamo šansu da li će doći do ukrštanja, ako ne dođe do ukrštanja roditelji se samo prepisuju.
+
+**Ukrštanje (crossover)** - za svaka dva odabrana roditelja prave se dva deteta korišćenjem operacije ukrštanja. 
+Ideja ukrštanja u smislu pronalaženja rešenja predstavlja intezifikaciju.
+
+**Crossover** u zavisnosti od problma može biti drugačiji ali se uglavnom izvršava na neki od sledeća dva načina: 
+1.  **Uniformno** - bira neku poziciju u genu i samo uradi swap levog dela iz oba gena.
+2.  **n - Poziciono** - bira više pozicija i deli oba gena na n+1 celinu nakon čega radi "cik-cak" swap delova gena.
+
+![](slike/EA/GA/crossovers.png)
+
+**Mutacija** prolazivši svaki gen (bit) sa nekom verovatnoćom može ga izmeniti (negirati).
+Ideja mutacije služi za diverzifikaciju, odnosno uvođenje novih rešenja (osobina) koje nisu mogle biti dobijene drugačije.
+
+![](slike/EA/GA/mutationsSwapFlip.png)
+
