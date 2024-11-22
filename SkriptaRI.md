@@ -555,6 +555,7 @@ Postoje dva osnovna pristupa selekciji:
 	$$p_x = \dfrac{f_x}{\sum_{i = 1}^n f_i}$$\
 	Ovakav način selekcije nije najbolji, jer kako one jedinke koje imaju bolji fitness imaju veće šanse da budu odabrane, one lošije jedinke će ređe biti odabrane.
 	Možda baš te lošije jedinke imaju neki gen koji nam je potreban u nekoj drugoj jedinci da bi dobili bolje rešenje.
+	Jedna od modifikacija ruletske selekcije je **Stohastičko univerzalno uzorkovanje (SUS)**.
 
 ![](slike/EA/rouletteTournament.png)
 
@@ -575,10 +576,11 @@ U osnovnom algoritmu GA ili SGA (Simple GA) čiji je pseudokod dat, selekcija ro
 Ideja ukrštanja u smislu pronalaženja rešenja predstavlja intezifikaciju.
 
 **Crossover** u zavisnosti od problma može biti drugačiji ali se uglavnom izvršava na neki od sledeća dva načina: 
-1.  **Uniformno** - bira neku poziciju u genu i samo uradi swap levog dela iz oba gena.
-2.  **n - Poziciono** - bira više pozicija i deli oba gena na n+1 celinu nakon čega radi "cik-cak" swap delova gena.
+1.  **Uniformno** - svaki gen se nasumično bira iz jednog od roditelja sa jednakom verovatnoćom.
+2. **Jednopoziciono** - bira jednu poziciju, pa se prvi deo hromozoma prenosi od jednog roditelja, a drugi deo od drugog.
+3.  **n - Poziciono** - bira više pozicija i deli oba gena na n+1 celinu nakon čega radi "cik-cak" swap delova gena.
 
-![](slike/EA/GA/crossovers.png)
+![](slike/EA/GA/crossover.png)
 
 **Mutacija** prolazivši svaki gen (bit) sa nekom verovatnoćom može ga izmeniti (negirati).
 Ideja mutacije služi za diverzifikaciju, odnosno uvođenje novih rešenja (osobina) koje nisu mogle biti dobijene drugačije.
