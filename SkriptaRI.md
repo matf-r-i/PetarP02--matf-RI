@@ -494,7 +494,7 @@ Očigledno inspirisano nekim istorijskim idejama o evoluciji:
 
 ### **Osnovni pojmovi:**
 1. **Hromozom/Jedinka** - kodirano rešenje, uglavnom pseudo nasumično generisano, uglavnom u vidu niza bitova i slično. (kod genetskog programiranja GP, rešenja mogu biti stabla)
-2. **Populacija **- skup više hromozoma
+2. **Populacija**- skup više hromozoma
 3. **Selekcija** - odabir jedinki koje će graditi sledeću generaciju
 4. **Ukrštanje (Crossover)** - mešanje hromozoma neke dve jedinke
 5. **Mutacija** - stohastička izmena delova hromozoma u nadi da izmene dodaju neke inovacije u populaciju
@@ -542,13 +542,13 @@ Faza u kojoj se se dešava odabir potomka. Ideja je da se onim boljim rešenjima
 Pa bi najniži selekcioni pritisak bio da izmešamo populaciju i nasumično biramo jedinke.
 
 Postoje dva osnovna pristupa selekciji:
-1. **Turnir**:
+1. **Turnir**:\
 	Ideja ovog pristupa jeste da izaberemo neki deo populacije, jedinke tog izabranog dela rangiramo, prema fitness-u, i izaberemo dve najbolje jedinke.
 	U zavisnosti od veličine izabranog broja jedinki za turnir (k), koji može biti jednak ili manji od veličine populacije (n), imamo sledeće ishode:
 	- k = 1: praktično je nasumičan odabir jedinki za crossover.
 	- k < n: najbolji pristup, pošto i one dobre i one loše jedinke imaju šansu da budu izabrane.
 	- k = n: u ovom slučaju uvek će biti izabrane one jedinke koje su najbolje u celoj populaciji, pa će se uniformna populacija steći jako brzo.
-1. **Rulet**:
+1. **Rulet**:\
 	Zamišljamo ruletski točak gde je svaka pozicija u koju loptica može da upadne jedna jedinka. 
 	Veličina pozicije za svaku jedinku je proporcijalna fitness vrednosti jedinke, ovo pretstavlja verovatnoću njenog odabira. Kako verovatnoća svih mogućih događaja mora da bude jednaka 1, moramo normalizovati sve verovatnoće. 
 	Pa u populaciji sa $n$ jedinki, za svaku jedinku računamo njenu verovatnoću:\
