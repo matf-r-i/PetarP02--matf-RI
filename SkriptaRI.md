@@ -575,7 +575,7 @@ U osnovnom algoritmu GA ili SGA (Simple GA) čiji je pseudokod dat, selekcija ro
 **Ukrštanje (crossover)** - za svaka dva odabrana roditelja prave se dva deteta korišćenjem operacije ukrštanja. 
 Ideja ukrštanja u smislu pronalaženja rešenja predstavlja intezifikaciju.
 
-**Crossover** u zavisnosti od problma može biti drugačiji ali se uglavnom izvršava na neki od sledeća dva načina: 
+**Crossover** u zavisnosti od problma može biti drugačiji ali se uglavnom izvršava na neki od sledećih načina: 
 1.  **Uniformno** - svaki gen se nasumično bira iz jednog od roditelja sa jednakom verovatnoćom.
 2. **Jednopoziciono** - bira jednu poziciju, pa se prvi deo hromozoma prenosi od jednog roditelja, a drugi deo od drugog.
 3.  **n - Poziciono** - bira više pozicija i deli oba gena na n+1 celinu nakon čega radi "cik-cak" swap delova gena.
