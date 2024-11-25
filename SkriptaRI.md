@@ -583,7 +583,7 @@ Ideja ukrštanja u smislu pronalaženja rešenja predstavlja intezifikaciju.
 ![](slike/EA/GA/crossover.png)
 
 **Mutacija** prolazivši svaki gen (bit) sa nekom verovatnoćom može ga izmeniti (negirati).
-Ideja mutacije služi za diverzifikaciju, odnosno uvođenje novih rešenja (osobina) koje nisu mogle biti dobijene drugačije.
+Ideja mutacije služi za diverzifikaciju, odnosno uvođenje novih osobina (rešenja) koje nisu mogle biti dobijene drugačije.
 
 ![](slike/EA/GA/mutationsSwapFlip.png)
 
