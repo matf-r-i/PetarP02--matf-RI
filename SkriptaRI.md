@@ -494,7 +494,7 @@ Očigledno inspirisano nekim istorijskim idejama o evoluciji:
 
 ### **Osnovni pojmovi:**
 1. **Hromozom/Jedinka** - kodirano rešenje, uglavnom pseudo nasumično generisano, uglavnom u vidu niza bitova i slično. (kod genetskog programiranja GP, rešenja mogu biti stabla)
-2. **Populacija**- skup više hromozoma
+2. **Populacija **- skup više hromozoma
 3. **Selekcija** - odabir jedinki koje će graditi sledeću generaciju
 4. **Ukrštanje (Crossover)** - mešanje hromozoma neke dve jedinke
 5. **Mutacija** - stohastička izmena delova hromozoma u nadi da izmene dodaju neke inovacije u populaciju
@@ -529,6 +529,11 @@ Klasični primer je binarni vektor fiksne dužine.
 
 ![](slike/EA/kodiranjeBitovi.png)
 
+Za same gene možemo koristiti kao što je predstavljeno bitove, ali to mogu biti i celi brojeve ili realni brojevi...
+Postoji i opcija gde se celi brojevi mogu predstaviti **Grejovim kodiranjem**, međutim danas je prihvaćeno kodiranje direktno odabranim tipom. 
+Imamo u vidu da način kodiranja utiče na druge funkcije (mutacije i ukrštanja).
+Prilikom kodiranja sa realnim brojevima ukoliko ih želimo predstaviti grejovim kodom moramo prihvatiti gubitak tačnosti.  Što veću tačnost želimo to su hromozomi duži a time evolucija sporija.
+
 Čuveni problem **trgovačkog putnika** možemo rešiti koristeći kod koji sadrži nasumičnu permutaciju gradova, što je ukupna dužina ovakve permutacije manja to je vrednost fitness funkcije veća.  **Mutacija** može biti swapovanje neka dva grada.
 
 ### Fitness funkcija:
@@ -542,13 +547,14 @@ Faza u kojoj se se dešava odabir potomka. Ideja je da se onim boljim rešenjima
 Pa bi najniži selekcioni pritisak bio da izmešamo populaciju i nasumično biramo jedinke.
 
 Postoje dva osnovna pristupa selekciji:
-1. **Turnir**:\
+1. **Turnir**:
 	Ideja ovog pristupa jeste da izaberemo neki deo populacije, jedinke tog izabranog dela rangiramo, prema fitness-u, i izaberemo dve najbolje jedinke.
 	U zavisnosti od veličine izabranog broja jedinki za turnir (k), koji može biti jednak ili manji od veličine populacije (n), imamo sledeće ishode:
 	- k = 1: praktično je nasumičan odabir jedinki za crossover.
 	- k < n: najbolji pristup, pošto i one dobre i one loše jedinke imaju šansu da budu izabrane.
 	- k = n: u ovom slučaju uvek će biti izabrane one jedinke koje su najbolje u celoj populaciji, pa će se uniformna populacija steći jako brzo.
-1. **Rulet**:\
+	Primetimo da što je veće **k** to je selekcioni pritisak veći.
+1. **Rulet**:
 	Zamišljamo ruletski točak gde je svaka pozicija u koju loptica može da upadne jedna jedinka. 
 	Veličina pozicije za svaku jedinku je proporcijalna fitness vrednosti jedinke, ovo pretstavlja verovatnoću njenog odabira. Kako verovatnoća svih mogućih događaja mora da bude jednaka 1, moramo normalizovati sve verovatnoće. 
 	Pa u populaciji sa $n$ jedinki, za svaku jedinku računamo njenu verovatnoću:\
@@ -572,18 +578,74 @@ Mada su spori, ovi algoritmi su odlični za rešavanje kombinaornih problema.
 
 U osnovnom algoritmu GA ili SGA (Simple GA) čiji je pseudokod dat, selekcija roditelja se vrši tako što razbacama roditelje i za svaka dva imamo šansu da li će doći do ukrštanja, ako ne dođe do ukrštanja roditelji se samo prepisuju.
 
-**Ukrštanje (crossover)** - za svaka dva odabrana roditelja prave se dva deteta korišćenjem operacije ukrštanja. 
-Ideja ukrštanja u smislu pronalaženja rešenja predstavlja intezifikaciju.
+Jednostavni genetski algoritam koristi takozvani **Genracijski model (Generation GA - GGA)**, gde svaka jedinka preživi tačno jednu generaciju, odnosno cela populacija se zameni novom populacijom, odnosno potopmcima. Ovo je i tipično za GA.
 
-**Crossover** u zavisnosti od problma može biti drugačiji ali se uglavnom izvršava na neki od sledećih načina: 
-1.  **Uniformno** - svaki gen se nasumično bira iz jednog od roditelja sa jednakom verovatnoćom.
+**Generacijski jaz** određujemo koji deo populacije želimo da menjamo, ako je odnos stare i nove generacije manji od 1, samo se deo populacije menja (odnos nove i stare generacije 1 je GGA). Ovaj model se koristi u **Evolutivnim strategijama ES**.
+
+**Model stabilnog stanja (Steady-State GA - SSGA)** generišemo jedno dete.
+
+Primećujemo da se u druga dva modela dešava da samo kopiramo jedinke iz stare generacije, postoji još jedan princip po kom se čuva prvih **n** jedinki sa najboljim fitnessom ocaj princip se naziva **Elitizam**. 
+Ideja je da čuvamo one jedinke koje su kvalitetne odnosno imaju dobar fitness, ali ne želimo da dozvolimo da one bolje jedinke nadvaladaju.
+
+### Crossover i Mutacija:
+
+**Ukrštanje (crossover)** - za svaka dva odabrana roditelja prave se dva deteta korišćenjem operacije ukrštanja. 
+Ideja ukrštanja u smislu pronalaženja rešenja predstavlja intezifikaciju. Drugim rečima, ukrštanje je istraživanje prostora rešenja koja mogu nastati rekombinovanjem već postojećih rešenja. 
+Mana ukrštanja je da ukoliko je optimalno rešenje "van dometa" trenutnog prostora rešenja nikada ga nećemo naći. Kako je "van dometa" određene osobine tog rešenja ne postoje ni u jednom od rešenja koja se nalaze u trenutnoj populaciji (lokalni minimum). 
+
+**Crossover** u zavisnosti od problma može biti drugačiji ali se uglavnom izvršava na neki od sledećih načina:
+1.  **Uniformno** - svaki gen jendog roditelja ima jednake šanse da se swapuje sa genom na istoj poziciji drugog roditelja.
 2. **Jednopoziciono** - bira jednu poziciju, pa se prvi deo hromozoma prenosi od jednog roditelja, a drugi deo od drugog.
 3.  **n - Poziciono** - bira više pozicija i deli oba gena na n+1 celinu nakon čega radi "cik-cak" swap delova gena.
 
 ![](slike/EA/GA/crossover.png)
 
-**Mutacija** prolazivši svaki gen (bit) sa nekom verovatnoćom može ga izmeniti (negirati).
+U slučaju realnog kodiranja koristimo **Aritmetičko ukrštanje**:
+$$z_i = \alpha x_i + (1 - \alpha)y_i$$
+$$0 \leq \alpha \leq 1$$
+Alfa možemo da biramo za svaku generaciju, da postavimo na početku  ili da se menja kroz generacije. 
+Jednostvano aritmetičko ukrštanje je kada izaberemo poziciju u kodu i odatle vršimo ukrštanje, celovito je kada je $k = 0$.
+
+**Mutacija** prolazi svaki gen (bit) sa nekom verovatnoćom može ga izmeniti (negirati).
 Ideja mutacije služi za diverzifikaciju, odnosno uvođenje novih osobina (rešenja) koje nisu mogle biti dobijene drugačije.
+Drugim rečima, mutacija pokušava da proširi prostor rešenja koja imamo do sada. Mana mutacije je njena destruktivnost. Kako može da proširi skup rešenja tako može da ga umanji, ili ,ukoliko je previše učestala, da prosto ne dozvoli populaciji da konvergira ka bilo kom minimumu.
 
 ![](slike/EA/GA/mutationsSwapFlip.png)
+
+Kao što smo naveli već, mutacija kod kodiranja bitovima je flipovanje vrednosti bita.
+Kada kodiramo realnim brojevima, neke od čestih mutacija:
+1. **Dodavanje šuma (Gaussian mutation)**:
+	Na broj dodajemo šum dobijen iz standardne normalne raspodele. 
+	Računamo novo x na sledeći način: $x' = x + N(0, \sigma)$
+2. **Uniformna mutacija**:
+	Svakom genu je dodeljen opseg i nova vrednost mu se dodeljuje uniformno iz tog opsega. 
+	Računamo novo x na sledeći način: $x' = U(a, b)$
+3. **Menjanje gena za korak**
+Ima više metoda ali ove su neke osnovne.
+
+### Problem trgovačkog putnika (TSP):
+Specifični problemi jesu oni zasnovani na **permutacijama**, jedan takav jeste problem trgovačkog putnika (TSP). 
+
+Trgovac treba da obiđe sve gradove i da se vrati u početni grad (napravi ciklus), ali sme da poseti svaki grad jednom (sem početnog). (za 30 gradova 30! rešenja)
+
+Kako trgovac treba da obiđe sve gradove znamo da jedino po čemu se rešenje može menjati jeste po redosledu obiđenih gradova. 
+**Kodiranje**: 
+Niz celih brojeva, gde svaki broj predstavlja drugačiji grad u grafu, a redosled graodva u nizu redosled posećivanja.
+
+Pošto moramo da posetimo sve gradove znamo da standardna mutacija neće raditi u našem slučaju, jer mutacija može da zameni neki broj nekim drugim, takvo rešenje je nama nedopustivo.
+**Mutacija**:
+1. **Umetanje**: Izaberemo neka dva gena i drugi umećemo tako da stoji odmah posle prvog, svi ostali geni se pomeraju.
+2. **Zamena**: Izaberemo dva gena i swapujemo ih.
+3. **Inverzija**: Izaberemo segment hromozoma nad kojom vršimo inverziju
+4. **Mešanje**: Izaberemo segment hromozoma i izmešamo gene unutar segmenta.
+
+![](slike/EA/GA/mutationPermutation.png)
+
+Sličan razlog kao kod mutacija, ako bi koristili standardno ukrštanje nastala bi nedopustiva rešenja koja mogu imati duple gradove.
+**Ukrštanja**:
+1. **Ukrštanje prvog reda**: Odaberemo segment hromozoma prvog roditelja, iskopiramo dati segment u prvo dete, nastavljamo desno od kopiranog segmenta i upisujemo sve one brojeve koji se nisu još pojavili u prvom detetu, sve dok se ne popune sve pozicije. Slično i za drugo dete.	
+	![](slike/EA/GA/ukrstanjePrvogRedaPermutation.png)
+
+2. **Delimično ukrštanje (PMX)**: Odaberemo segment hromozoma prvog roditelja. Gledajući početak ovog segmenta idemo redom kroz isti segment drugog roditelja i gledamo u koji broj se broj drugog roditelja slika, posmatramo u koji se broj taj broj slika u drugom roditelju, postupak ponavljamo dok ne izađemo iz segmenta, ili ne prođemo sve elemente segmenta preko kog pišemo iz drugog roditelja. Nakon ovoga prepisujemo na slobodne pozicije brojeve iz drugog roditelja. Slično za drugo dete.
+	![](slike/EA/GA/ukrstanjePMXPermutation.png)
 
