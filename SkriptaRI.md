@@ -675,7 +675,7 @@ Sličan razlog kao kod mutacija, ako bi koristili standardno ukrštanje nastala 
 ## 9.2 Genetsko programiranje (GP):
 Osmišljen od strane **John R. Koza**, ovaj algoritam je inspirisan idejom da ako se računaru daju ulazni i izlazni parametri on bi trebalo da zna da napravi program koji rešava dati problem.
 
-Idejno ovaj algoritam radi nad stablima, odnosno **Apstraktnim Sintaksnim Stablima (AST)**. Svaki program može se zapisati u sintaksnom stablu, primer može da bude neka jednačina $x^2 + 5x - 1 = 0$ drugačije zapisana i kao $xx + 5x - 1 = 0$, njeno sintaksno stablo bi izgledalo:
+Idejno ovaj algoritam radi nad stablima, odnosno **Apstraktnim Sintaksnim Stablima (AST)**. Svaki program može se zapisati u sintaksnom stablu, primer može da bude neka jednačina $x^2 + 5x - 1 = 0$ drugačije zapisana i kao $xx + 5x - 1 = 0$, njeno sintaksno stablo bi izgledalo:\
 ![](slike/EA/GP/AST.png)
 
 Mozemo primetiti da se promenljive nalaze na samim listovima ovih stabala, dok se funkcije (operacije) nalaze u unutrašnjim čvorovima stabla.
