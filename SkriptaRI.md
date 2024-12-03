@@ -484,6 +484,29 @@ Primer ovakvih algoritama je algoritam jata ptica (Bird flocking PSO), funkcioni
 	- inercije
 3. Vremenom rešenja konvergira ka najboljem rešenju, a iscrtavanjem ovog algoritma rešenja izgledaju kao jato pica.
 
+**Primer**: Tražimo minimum funkcije $f(x, y) = -20e^{-0.2\sqrt{0.5(x^2 + y^2)}} -e^{0.5(\cos{2\pi x} + \cos{2\pi y})} + e + 20$ poznata i kao ["Ackley function"](https://en.wikipedia.org/wiki/Ackley_function), tražimo rešenje na domenu $-5 \leq x,y \leq 5$. 
+Uzimamo ovakvu funkciju pošto se vakva vrsta algoritma uglavnom koristi za probleme sa kontinualnim domenom.
+
+Prvo što smo rekli da želimo jeste da rasporedimo **n** ptica pseudo nasumično po  prostoru rešenja (domenu), dakle biramo $n$ pozicija {$(x, y) | -5 \leq x,y \leq 5$}. Dalje svakoj ptici izračunamo njenu lokalnu najbolju poziciju, njen vektor kretajna (inercija) i odredimo koje je to globalno najbolje rešenje (najbolje od svih lokalnih rešenje grupe).
+
+| Funkcija                                   | 0-ta iteracija                                   |
+| ------------------------------------------ | ------------------------------------------------ |
+| ![](slike/Metaheuristike/PSO/funkcija.png) | ![](slike/Metaheuristike/PSO/rasporedTacaka.png) |
+
+Već u prvoj iteraciji želimo adekvatno da pomerimo pticu na njenu sledeću poziciju. Imamo sledeće vrednosti **najbolju poziciju ptice ($p_{local}$)**, **najbolju poziciju grupe ($p_{global}$)** i **inerciju ptice ($v_i$)** kao i **trenutnu poziciju ptice ($p_{pos}$)**.
+Novu poziciju dobijamo kao zbir vektora inercije ($v_i$), vektora $v_{global} = p_{global} - p_{pos}$ i vektora $v_{local} = p_{local} - p_{pos}$. 
+Kako vektor ka globalnoj najboljoj poziciji ima verovatno najveću vrednost vrednost lokalnog rešenja ptice biće zanemareno i time gubimo na osobini **intenzivikacije**. Da bi izbegli ovo želimo da množimo svaki vektor nekom konstantom koju možemo da menjamo, pa bi novu poziciju računali na sledeći način $v_i = c_iv_i + c_{local}v_{local} + c_{global}v_{global}$.
+Kako bi još više poboljšali naše istraživanje domena želimo da uvedemo stohastičnosti, odabirom dva broja između 0 i 1 ($r_{local}$ i $r_{global}$), i time omogućimo **diverzifikaciju**. 
+Konačna formula bi bila:\
+$$v_i = c_iv_i + c_{local}r_{local}v_{local} + c_{global}r_{global}v_{global}$$\
+Koačno ono što moramo da proverimo posle svake iteracije jeste da li je neko od novih lokalnih pozicija novo globalno najbolje rešenje. 
+
+| iter > 5                                           | iter > 30                                            | iter > 50                                          |
+| -------------------------------------------------- | ---------------------------------------------------- | -------------------------------------------------- |
+| ![](slike/Metaheuristike/PSO/iteracijaPocetak.png) | ![](slike/Metaheuristike/PSO/iteracijaSredina+1.png) | ![](slike/Metaheuristike/PSO/iteracijaKrajnje.png) |
+
+Primetimo da se vremenom sve tačke skupljaju u jednu tačku, ta tačka je zapravo minimum naše funkcije.
+
 # 9. Evolutivna izračunavanja:
 Evolutivno izračunavanje predstavlja proces poboljšavanja organizama ili sistema kroz takmičarsko okruženje, gde se najuspešnije jedinke prilagođavaju i prenose svoje karakteristike na buduće generacije. Poznati kao **Evolutivni algoritmi**.
 **Evolutivni algoritmi (EA)** pripadaju **P-Metaheuristici**.
@@ -648,4 +671,48 @@ Sličan razlog kao kod mutacija, ako bi koristili standardno ukrštanje nastala 
 
 2. **Delimično ukrštanje (PMX)**: Odaberemo segment hromozoma prvog roditelja. Gledajući početak ovog segmenta idemo redom kroz isti segment drugog roditelja i gledamo u koji broj se broj drugog roditelja slika, posmatramo u koji se broj taj broj slika u drugom roditelju, postupak ponavljamo dok ne izađemo iz segmenta, ili ne prođemo sve elemente segmenta preko kog pišemo iz drugog roditelja. Nakon ovoga prepisujemo na slobodne pozicije brojeve iz drugog roditelja. Slično za drugo dete.\
 	![](slike/EA/GA/ukrstanjePMXPermutation.png)
+
+## 9.2 Genetsko programiranje (GP):
+Osmišljen od strane **John R. Koza**, ovaj algoritam je inspirisan idejom da ako se računaru daju ulazni i izlazni parametri on bi trebalo da zna da napravi program koji rešava dati problem.
+
+Idejno ovaj algoritam radi nad stablima, odnosno **Apstraktnim Sintaksnim Stablima (AST)**. Svaki program može se zapisati u sintaksnom stablu, primer može da bude neka jednačina $x^2 + 5x - 1 = 0$ drugačije zapisana i kao $xx + 5x - 1 = 0$, njeno sintaksno stablo bi izgledalo:
+![](slike/EA/GP/AST.png)
+
+Mozemo primetiti da se promenljive nalaze na samim listovima ovih stabala, dok se funkcije (operacije) nalaze u unutrašnjim čvorovima stabla.
+Ovako bi izgledalo i stablo bilo kog drugog programa.
+
+Znajući ovo evolucija programa bi se zasnivala kao i kod GA na crossover-u i mutacijama.
+Prilikom mutacija nije dozvoljeno da list mutiramo tako da on postane neki od funkcija, operatora i slično...
+
+**Crossover**:
+Slično kao kod GA, uzmemo dva roditelja i biramo dve pozicije u roditeljima i podstabla krenuvši od tih pozicija swap-ujemo (**jednopoziciono ukrštanje**).
+
+| Odabir pozicija                 | Swap-ovanje podstabla           |
+| ------------------------------- | ------------------------------- |
+| ![](slike/EA/GP/crossover1.png) | ![](slike/EA/GP/crossover2.png) |
+
+**Mutacija**:
+U ovom slučaju kao i kod permutacija mormao da osmislimo pogodnu mutaciju, odnosno dozviljenu mutaciju.
+Kao što smo prethodno primetili, listovi AST su promenljive i konstante, dok su unutrašnji čvorovi kao i koren čvora su funkcije, operacije i slično.
+
+Unajući ovo neke dozvoljene mutacije bi bile:
+1. **Mutacija listova**: kada znamo da je čvor list onda:
+	- **Konstanta**: vrednost možemo da uvećamo ili smanjimo, zamenimo novim brojem ili zamenimo promenljivom...
+	- **Promenljiva**: promenljivu možemo zameniti drugom promenljivom, uvođenjem nove promenljive ili zamenom promenljive konstantom...
+2. **Mutacija unutračnjeg čvora**: zamenimo dati čvor drugom funkcijom, operacijom i slično, naravno moramo da zadržimo sintaksnu tačnost.
+3. **Mutacija umetanjem novih podstabala**: poznato kao i **Grow**, jeste da dopustimo programu da izgradi pliće podstablo i da ga umetnemo na neku poziciju unutar AST-a programa.
+
+| Mutacija listova               | Mutacija  operacije            |
+| ------------------------------ | ------------------------------ |
+| ![](slike/EA/GP/mutation1.png) | ![](slike/EA/GP/mutation2.png) |
+
+Primetimo da ovaj algoritam u teoriji može da gradi program, međutim ovo je veoma težak postao, pošto moramo voditi računa o velikom broju sintaksnih i semantičkih pravila.
+Doduše primenljivi jesu, i neki primeri jesu GP algortimi koji prave **regexe**, **aritmetičke formule**, **logičke formule**, neki lakši programi...
+
+Dodatno o čemu moramo voditi računa prilikom rada algoritma jeste da ne dozvolimo algoritmu da pravi preduboka ili preširoka stabla, ovo rešavamo određenim ograničenjima koja če kvariti fitness funkciju ili potpuno brisati te delove stabla (nije najbolje rešenje).
+
+**Primer**: recimo da imamo program koji rešava zadatke iz poznate **Moj broj** igre. U ovoj igri igraču je data neka tražena vrednost **b** kao i niz od 6 brojeva **nums**, od igrača se traži da koristeći osnovne operacije (+, -, \*, /), nađe traženi broj **b** tako da se ni jedan broj iz **nums** ne ponavlja. (igrač ne mora da iskoristi sve brojeve)
+U ovom primeru, pretpostavimo da smo implementirali sve operacije kao binarno stablo, primetimo da nam nije optimalno da GP pravi preduboka stabla, ili stabla koja imaju više od 11 čvorova. 
+Ovo nije magičan broj već znamo da ako stablo ima **n** listova onda znamo da maksimalan broj čvorova nivoa iznad je n/2, nivoa iznad n/4 .... 1 dakle formula popunjenog binarnog stabla bi bila $2n - 1$.
+Samim tim ne bi želeli da nam GP pravi bilo koja stabla čiji je ukupan broj čvorova veći od 11.
 
