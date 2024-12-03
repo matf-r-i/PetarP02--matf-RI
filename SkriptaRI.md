@@ -673,19 +673,30 @@ Sličan razlog kao kod mutacija, ako bi koristili standardno ukrštanje nastala 
 	![](slike/EA/GA/ukrstanjePMXPermutation.png)
 
 ## 9.2 Genetsko programiranje (GP):
-Osmišljen od strane **John R. Koza**, ovaj algoritam je inspirisan idejom da ako se računaru daju ulazni i izlazni parametri on bi trebalo da zna da napravi program koji rešava dati problem.
+Osmišljen od strane **John R. Koza**, ovaj algoritam je inspirisan idejom da ako se računaru daju ulazni i izlazni parametri on bi trebalo da zna da napravi program koji rešava dati problem. Koristi princip GA, generacijska evolucija rešenja, odnosno GP je nadovezan na GA.
 
 Idejno ovaj algoritam radi nad stablima, odnosno **Apstraktnim Sintaksnim Stablima (AST)**. Svaki program može se zapisati u sintaksnom stablu, primer može da bude neka jednačina $x^2 + 5x - 1 = 0$ drugačije zapisana i kao $xx + 5x - 1 = 0$, njeno sintaksno stablo bi izgledalo:\
 ![](slike/EA/GP/AST.png)
 
-Mozemo primetiti da se promenljive nalaze na samim listovima ovih stabala, dok se funkcije (operacije) nalaze u unutrašnjim čvorovima stabla.
+Mozemo primetiti da se promenljive nalaze na samim listovima **terminali** (konstante, promenljive) ovih stabala, dok se **funkcije** (operacije) nalaze u unutrašnjim čvorovima stabla.
 Ovako bi izgledalo i stablo bilo kog drugog programa.
 
 Znajući ovo evolucija programa bi se zasnivala kao i kod GA na crossover-u i mutacijama.
 Prilikom mutacija nije dozvoljeno da list mutiramo tako da on postane neki od funkcija, operatora i slično...
 
+Osnovni koraci:
+1. Definisati skup **terminala**
+2. Definisati skup **funkcija**
+3. **Fitness** funkcija
+4. Parametri kontrolisanja izvršavanja (veličina populacije, šansa mutacija, elitizam i slično)
+5. Definisati kad se vrši **zaustavljanje** 
+
+**Fitness**:
+Funkcija čija nam vrednost predstavlja kvalitet sadačnjeg koda. U vrednost, odnosno kvalitet, ulazi i da li se sam kod kompajlira, koliko ima grešaka i slično.
+
 **Crossover**:
-Slično kao kod GA, uzmemo dva roditelja i biramo dve pozicije u roditeljima i podstabla krenuvši od tih pozicija swap-ujemo (**jednopoziciono ukrštanje**).
+Slično kao kod GA, uzmemo dva roditelja i biramo dve pozicije u roditeljima i podstabla krenuvši od tih pozicija swap-ujemo (**jednopoziciono ukrštanje**). 
+Dugačije se ova operacija nad stablima zove i **Headless chicken** crossover.
 
 | Odabir pozicija                 | Swap-ovanje podstabla           |
 | ------------------------------- | ------------------------------- |
@@ -711,7 +722,7 @@ Doduše primenljivi jesu, i neki primeri jesu GP algortimi koji prave **regexe**
 
 Dodatno o čemu moramo voditi računa prilikom rada algoritma jeste da ne dozvolimo algoritmu da pravi preduboka ili preširoka stabla, ovo rešavamo određenim ograničenjima koja če kvariti fitness funkciju ili potpuno brisati te delove stabla (nije najbolje rešenje).
 
-**Primer**: recimo da imamo program koji rešava zadatke iz poznate **Moj broj** igre. U ovoj igri igraču je data neka tražena vrednost **b** kao i niz od 6 brojeva **nums**, od igrača se traži da koristeći osnovne operacije (+, -, \*, /), nađe traženi broj **b** tako da se ni jedan broj iz **nums** ne ponavlja. (igrač ne mora da iskoristi sve brojeve)
+**Primer**: recimo da imamo program koji rešava zadatke iz poznate [**Moj broj**](https://github.com/PetarP02/Genetic-Programming-GP) igre. U ovoj igri igraču je data neka tražena vrednost **b** kao i niz od 6 brojeva **nums**, od igrača se traži da koristeći osnovne operacije (+, -, \*, /), nađe traženi broj **b** tako da se ni jedan broj iz **nums** ne ponavlja. (igrač ne mora da iskoristi sve brojeve)
 U ovom primeru, pretpostavimo da smo implementirali sve operacije kao binarno stablo, primetimo da nam nije optimalno da GP pravi preduboka stabla, ili stabla koja imaju više od 11 čvorova. 
 Ovo nije magičan broj već znamo da ako stablo ima **n** listova onda znamo da maksimalan broj čvorova nivoa iznad je n/2, nivoa iznad n/4 .... 1 dakle formula popunjenog binarnog stabla bi bila $2n - 1$.
 Samim tim ne bi želeli da nam GP pravi bilo koja stabla čiji je ukupan broj čvorova veći od 11.
