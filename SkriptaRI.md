@@ -128,7 +128,7 @@ Izgrađeni na ovom konceptu su:
 **GPT** (generative pretrained transformers) - generiše tekst (prevođenje, pisanje koda, dovršavanje rečenica...), trenirani da predpostave sledeću reč na osnovu već ispisanih reči...
 
 LLM i transformer se danas tretiraju kao sinonimi usled velike zasnovanosti LLM-a na arhitekturi transformera.
- 
+
 ## 3.2 Ograničenja LLM-a:
 
 1. **Razumevanje konteksta:** Iako LLM-ovi mogu obrađivati veliki broj informacija, često imaju poteškoće sa dubljim razumevanjem konteksta ili složenih apstraktnih veza.
@@ -258,9 +258,9 @@ Uključuje niz koraka za pronalaženje najboljeg mogućeg rešenja iz globalne p
 2. **Jump to Something New (Prelazak na novo)** – prelazak u različite oblasti prostora rešenja, omogućavajući izbegavanje lokalnih minimuma.
 3. **Use a Large Sample (Korišćenje velikog uzorka)** – istraživanje većeg broja mogućih rešenja kako bi se povećala šansa za pronalaženje globalnog optimuma.
 
-# 5. Grafovi:
+# 5. Grafovi
 
-**Graf** je matematička struktura koja se koristi za modeliranje odnosa između objekata. 
+**Graf** je matematička struktura koja se koristi za modeliranje odnosa između objekata.
 
 Sastoji se od osnovnih komponenti:
 
@@ -407,7 +407,6 @@ Postavka zadatka je sledeća:
 3. I konačno funkcija koju želimo da maksimizujemo:
 	max($19 * o_1 + 17 * o_2 + 30 * o_3 + 13 * o_4 + 25 * o_5 + 29 * o_6 + 23 * o_8 + 10 * o_8$)\
 	Radi lepšeg ispisa možemo zameniti sve ove promenljive vektorima.
-
 
 # 8. Metaheuristike:
 
