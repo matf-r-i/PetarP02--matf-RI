@@ -473,7 +473,7 @@ Koristeći VNS mogli bi da rešimo i problem ranca, jedina razlika bi bila u pre
 Na osnovu toga vidimo da je VNS zaista metaheuristika.
 
 ## 8.2 Population-based (P - Metaheuristika):
-U ovu grupu spadaju sve one metaheuristike koje e bave unapređivanjem više rešenja njihovim simultanim evoluiranjem.
+U ovu grupu spadaju sve one metaheuristike koje se bave unapređivanjem više rešenja njihovim simultanim evoluiranjem.
 
 Primer ovakvih algoritama je algoritam jata ptica (Bird flocking PSO), funkcioniše po sledećem principu:
 1. Izaberemo pseudo nasumično **n** rešenja, svako rešenje predstavlja pticu u prostoru rešenja koja se kreće ka optimalnom rešenju
@@ -726,3 +726,8 @@ U ovom primeru, pretpostavimo da smo implementirali sve operacije kao binarno st
 Ovo nije magičan broj već znamo da ako stablo ima **n** listova onda znamo da maksimalan broj čvorova nivoa iznad je n/2, nivoa iznad n/4 .... 1 dakle formula popunjenog binarnog stabla bi bila $2n - 1$.
 Samim tim ne bi želeli da nam GP pravi bilo koja stabla čiji je ukupan broj čvorova veći od 11.
 
+# 10. Inteligencija grupa (SI - Swarm Intelligence):
+Inteligencija grupa predstavlja proces u kojem jedinke istražuju svoja lokalna rešenja dok istovremeno komuniciraju i sarađuju sa ostalim članovima grupe. 
+Kroz ovu interakciju dolazi do globalnog ponašanja, što omogućava grupi da kolektivno pronađe optimalno rešenje problema ili se prilagodi promenljivim uslovima u okruženju.
+
+Jedan od primera ovakvog algortima jeste Algoritam jata prica (Birds flocking PSO) u [8.2](#82-population-based-p---metaheuristika)
