@@ -484,7 +484,9 @@ Primer ovakvih algoritama je algoritam jata ptica (Bird flocking PSO), funkcioni
 3. Vremenom rešenja konvergira ka najboljem rešenju, a iscrtavanjem ovog algoritma rešenja izgledaju kao jato pica.
 
 **Primer**: Tražimo minimum funkcije $f(x, y) = -20e^{-0.2\sqrt{0.5(x^2 + y^2)}} -e^{0.5(\cos{2\pi x} + \cos{2\pi y})} + e + 20$ poznata i kao ["Ackley function"](https://en.wikipedia.org/wiki/Ackley_function), tražimo rešenje na domenu $-5 \leq x,y \leq 5$. 
-Uzimamo ovakvu funkciju pošto se vakva vrsta algoritma uglavnom koristi za probleme sa kontinualnim domenom.
+Uzimamo ovakvu funkciju pošto se ova vrsta algoritma uglavnom koristi za probleme sa **kontinualnim** domenom.
+
+Hladnije boje na grafu pretstavljaju niske vrednosti a toplije predstvaljaju više vrednosti.
 
 Prvo što smo rekli da želimo jeste da rasporedimo **n** ptica pseudo nasumično po  prostoru rešenja (domenu), dakle biramo $n$ pozicija {$(x, y) | -5 \leq x,y \leq 5$}. Dalje svakoj ptici izračunamo njenu lokalnu najbolju poziciju, njen vektor kretajna (inercija) i odredimo koje je to globalno najbolje rešenje (najbolje od svih lokalnih rešenje grupe).
 
@@ -730,4 +732,27 @@ Samim tim ne bi želeli da nam GP pravi bilo koja stabla čiji je ukupan broj č
 Inteligencija grupa predstavlja proces u kojem jedinke istražuju svoja lokalna rešenja dok istovremeno komuniciraju i sarađuju sa ostalim članovima grupe. 
 Kroz ovu interakciju dolazi do globalnog ponašanja, što omogućava grupi da kolektivno pronađe optimalno rešenje problema ili se prilagodi promenljivim uslovima u okruženju.
 
-Jedan od primera ovakvog algortima jeste Algoritam jata prica (Birds flocking PSO) u [8.2](#82-population-based-p---metaheuristika)
+Jedna od bitnih osobina ovih algoritama je da su dinamički, odnoson ukoliko se prostor menja tokom rada algoritma, sposobni su da se prilagode i nađu novo rešenje.
+Primer ovakvog ponašanja je ako postavimo kamen na put koji je oformljen ka hrani od strane mrava, brzo će naći novi optimalni put ka istoj toj hrani. 
+Ovi algortimi pripadaju **P - Metaheuristikama**, i često se koriste na problemima **kontinualne** prirode.
+
+Osobina računara da brojeve čuvaju u ograničenoj memoriji, **No Free Lucnch (NFL)** teorema tvrdi da su svi **kontinualni** problemi rešavani na računarima ustvari **diskretni** problemi.
+
+Razlika ovih algoritama od EA jeste u činjenici da jedinke ovde rade zajedno, kreću se zajedno u smeru rešenja.
+
+Razmena informacija unutar grupa se vrši na dva načina:
+1. **Direktna** - jedinke moraju da interaguju na ličnom nivou sa drugim.
+2. **Indirektno** - individulano ponašanje menja okruženje.
+
+Neki primeri:
+1. **Birds flocking optimization** - svaka ptica se kreće poštovaći najbolje rešenje grupe + njeno najbolje rešenje
+2. **Ant colony optimization (ACO)** - svaki mrav ostavlja feromone prilikom traženja hrane, jačina feromona predstavlja kvalitet rešenja koji drugi mravi mogu i ne moraju da prate.
+3. **Artificial Bee Colony (ABC)** - inspirisan grupama pčela u potrazi za nektarom, postoje tri vrste pčela **izviđači** (diverzifikacija), **zaposleni** (traže lokalna rešenja) i **posmatrači** (intenzivikacija, biraju gde će se vršiti istraživanje)
+4. **Bacterial foraging optimization (BFO)** - makterije se razmnožavaju u onim delovima gde je najbolje rešenje, u svakoj generaciji se odstranjuje polovina rešenja.
+I drugi...
+
+Još jedna korist SI algoritama jeste u izgradnji trodimenzialnih tela na osnovu nekih pravila.
+
+Jedan od algortima Algoritam jata prica (Birds flocking PSO) predstvaljeno je u [8.2](#82-population-based-p---metaheuristika).
+
+## 10.1  Ant Colony Optimization (ACO):
