@@ -15,5 +15,6 @@ clearNeki materijali za kurs Računarske inteligencije, četvrte godine Matemati
 9. [Evolutivna izračunavanja](SkriptaRI.md/#9-evolutivna-izračunavanja) - u izradi\
     9.1. [Genetski algoritmi GA](SkriptaRI.md/#91-genetski-algoritmi-ga)\
     9.2. [Genetsko programiranje GP](SkriptaRI.md/#92-genetsko-programiranje-gp)
+10. [Inteligencija grupa (SI - Swarm Intelligence)](SkriptaRI.md/#10-inteligencija-grupa-si---swarm-intelligence)
 
 Skripta pisana u Obsidian-u.
