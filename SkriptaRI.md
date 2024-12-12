@@ -496,7 +496,7 @@ Prvo što smo rekli da želimo jeste da rasporedimo **n** ptica pseudo nasumičn
 
 Već u prvoj iteraciji želimo adekvatno da pomerimo pticu na njenu sledeću poziciju. Imamo sledeće vrednosti **najbolju poziciju ptice ($p_{local}$)**, **najbolju poziciju grupe ($p_{global}$)** i **inerciju ptice ($v_i$)** kao i **trenutnu poziciju ptice ($p_{pos}$)**.
 Novu poziciju dobijamo kao zbir vektora inercije ($v_i$), vektora $v_{global} = p_{global} - p_{pos}$ i vektora $v_{local} = p_{local} - p_{pos}$. 
-Kako vektor ka globalnoj najboljoj poziciji ima verovatno najveću vrednost vrednost lokalnog rešenja ptice biće zanemareno i time gubimo na osobini **intenzivikacije**. Da bi izbegli ovo želimo da množimo svaki vektor nekom konstantom koju možemo da menjamo, pa bi novu poziciju računali na sledeći način $v_i = c_iv_i + c_{local}v_{local} + c_{global}v_{global}$.
+Kako vektor ka globalnoj najboljoj poziciji ima verovatno najveću vrednost vrednost lokalnog rešenja ptice, biće zanemareno i time gubimo na osobini **intenzivikacije**. Da bi izbegli ovo želimo da množimo svaki vektor nekom konstantom koju možemo da menjamo, pa bi novu poziciju računali na sledeći način $v_i = c_iv_i + c_{local}v_{local} + c_{global}v_{global}$.
 Kako bi još više poboljšali naše istraživanje domena želimo da uvedemo stohastičnosti, odabirom dva broja između 0 i 1 ($r_{local}$ i $r_{global}$), i time omogućimo **diverzifikaciju**. 
 Konačna formula bi bila:\
 $$v_i = c_iv_i + c_{local}r_{local}v_{local} + c_{global}r_{global}v_{global}$$\
@@ -753,6 +753,33 @@ I drugi...
 
 Još jedna korist SI algoritama jeste u izgradnji trodimenzialnih tela na osnovu nekih pravila.
 
-Jedan od algortima Algoritam jata prica (Birds flocking PSO) predstvaljeno je u [8.2](#82-population-based-p---metaheuristika).
+## 10.1  Particle Swarm Optimization (PSO):
+U osnovnom PSO (Particle Swarm Optimization) algoritmu imamo grupi čestica, tako nazvanih zbog osobine da svaka jedinka ima brzinu i ubrzanje, u svakoj iteraciji se računa nova pozicija svake čestice. 
 
-## 10.1  Ant Colony Optimization (ACO):
+Svaka čestica čuva **najbolju poziciju čestice ($p_{local}$)**, **najbolju poziciju grupe ($p_{global}$)** i **inerciju čestice ($v_i$)** kao i **trenutnu poziciju čestice ($p_{pos}$)**.
+
+Formula po kojoj se računa novi momentum čestice:\
+$$v_i = c_iv_i + c_{local}r_{local}v_{local} + c_{global}r_{global}v_{global}$$\
+gde su:
+1. $v_{global} = p_{global} - p_{pos}$ **vektor ka najboljem rešenju grupe**,
+2. $v_{local} = p_{local} - p_{pos}$ **vektor ka ličnom najboljem rešenju**
+3. $r_{global}$, $r_{local}$ brojevi između 0 i 1 koji uvode stohastičnost
+4. $c_{local}$, $c_{global}$ i $c_{i}$ **konstante ubrzanja**, odnosno koliko će se stare vrednosti koristiti u računanju novog momentuma. 
+
+Bitna je vrednost $c_i$ jer omogućava kontrolu intenzifikacije i diverzifikacije:
+- $c_i \geq 1$ - brzina stalno raste i grupa divergira
+- $c_i \leq 0$ - brzina se smanjuje vremenom, dok ne dostigne 0
+- $0 \leq c_i \leq 1$ - čestice usporavaju pa konvergencija zavisi od $c_{local}$ i $c_{global}$, kako je $c_i$ između 1 i 0 znamo da će starije vrednosti momentuma imati manji uticaj na novu vrednost.
+### Pseudokod PSO:
+- generiši populaciju $P(n)$
+- globalMin = min($P(n)$)
+- **while** nisu zadovoljeni uslovi:
+	- **for** p in $P(n)$ 
+		- velocity_update()
+		- position_update()
+	- **end**
+- **end**
+
+Detaljno objašnjenje jednog od algortima, Algoritam jata prica (Birds flocking PSO), predstvaljeno je u [8.2](#82-population-based-p---metaheuristika).
+
+## 10.2 Artificial Bee Colony (ABS):
