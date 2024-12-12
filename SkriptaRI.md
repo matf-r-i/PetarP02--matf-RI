@@ -486,7 +486,7 @@ Primer ovakvih algoritama je algoritam jata ptica (Bird flocking PSO), funkcioni
 **Primer**: Tražimo minimum funkcije $f(x, y) = -20e^{-0.2\sqrt{0.5(x^2 + y^2)}} -e^{0.5(\cos{2\pi x} + \cos{2\pi y})} + e + 20$ poznata i kao ["Ackley function"](https://en.wikipedia.org/wiki/Ackley_function), tražimo rešenje na domenu $-5 \leq x,y \leq 5$. 
 Uzimamo ovakvu funkciju pošto se ova vrsta algoritma uglavnom koristi za probleme sa **kontinualnim** domenom.
 
-Hladnije boje na grafu pretstavljaju niske vrednosti a toplije predstvaljaju više vrednosti.
+Hladnije boje na grafu pretstavljaju niske vrednosti a toplije pretstvaljaju više vrednosti.
 
 Prvo što smo rekli da želimo jeste da rasporedimo **n** ptica pseudo nasumično po  prostoru rešenja (domenu), dakle biramo $n$ pozicija { $(x, y) \| -5 \leq x,y \leq 5$ }. Dalje svakoj ptici izračunamo njenu lokalnu najbolju poziciju, njen vektor kretajna (inercija) i odredimo koje je to globalno najbolje rešenje (najbolje od svih lokalnih rešenje grupe).
 
@@ -745,11 +745,11 @@ Razmena informacija unutar grupa se vrši na dva načina:
 2. **Indirektno** - individulano ponašanje menja okruženje.
 
 Neki primeri:
-1. **Birds flocking optimization** - svaka ptica se kreće poštovaći najbolje rešenje grupe + njeno najbolje rešenje
+1. **Birds flocking optimization (PSO)**  - svaka ptica se kreće poštovaći najbolje rešenje grupe + njeno najbolje rešenje.
 2. **Ant colony optimization (ACO)** - svaki mrav ostavlja feromone prilikom traženja hrane, jačina feromona predstavlja kvalitet rešenja koji drugi mravi mogu i ne moraju da prate.
-3. **Artificial Bee Colony (ABC)** - inspirisan grupama pčela u potrazi za nektarom, postoje tri vrste pčela **izviđači** (diverzifikacija), **zaposleni** (traže lokalna rešenja) i **posmatrači** (intenzivikacija, biraju gde će se vršiti istraživanje)
+3. **Artificial Bee Colony (ABC)** - inspirisan grupama pčela u potrazi za nektarom, postoje tri vrste pčela **izviđači** (diverzifikacija), **zaposleni** (traže lokalna rešenja) i **posmatrači** (intenzivikacija, biraju gde će se vršiti istraživanje).
 4. **Bacterial foraging optimization (BFO)** - makterije se razmnožavaju u onim delovima gde je najbolje rešenje, u svakoj generaciji se odstranjuje polovina rešenja.
-I drugi...
+
 
 Još jedna korist SI algoritama jeste u izgradnji trodimenzialnih tela na osnovu nekih pravila.
 
@@ -780,6 +780,65 @@ Bitna je vrednost $c_i$ jer omogućava kontrolu intenzifikacije i diverzifikacij
 	- **end**
 - **end**
 
-Detaljno objašnjenje jednog od algortima, Algoritam jata prica (Birds flocking PSO), predstvaljeno je u [8.2](#82-population-based-p---metaheuristika).
+Detaljno objašnjenje Algoritam jata prica (Birds flocking PSO) predstvaljeno je u [8.2](#82-population-based-p---metaheuristika).
 
-## 10.2 Artificial Bee Colony (ABS):
+## 10.2 Artificial Bee Colony (ABC):
+Algoritam je zasnovan na ponašanju pčela prilikom traženja polena. 
+Pčele komuniciraju plesom, kojim govore ostalim pčelama gde se nalazi više polena, odnosno gde je kvalitetnije rešenje.
+
+Pčele su podeljene na tri grupe:
+1. **Employed bees (Zaposlene)** - ove pčele imaju dužnost da "iscrpljuju" resurs koje su one našle kao optimalan.
+2. **Onlooker bees (Posmatrači)** - ove pčele na osnovu kvaliteta ostalih pčela i njihovog "plesa" biraju da li će nastaviti da iscrpljuju svoje resurse ili će preći na neki bolji resurs populacije.
+3. **Scout bees (Izviđači)** - ovo su pčele koje nakon što su iscrpile svoj resurs biraju neki sledeći neistraženi resurs.
+
+Dakle ideja je sledeća zaposlene pčele prikuljaju polen (lokalno rešenje jedinke ekploatacija), dok pčele posmatrači nadgledaju i traže one pčele koje su našle najviše polena i šalju druge pčele da rade na tim pozicijama (konvergencija rešenja) i na kraju pčele istraživači traže druge izvore polena (eksploracija).
+
+Mada su pomenute kao tri različite grupe pčela, ustvari svaka pčela unutar populacije menja svoju ulogu, pa se može reći i da prolazi kroz 3 faze ponašanja u svakoj iteraciji. 
+### Pseudokod ABC:
+- generiši populaciju $P(n)$
+- nadji globalniMin = min($P(n)$)
+- **while** nisu ispunjeni uslovi:
+	- **for** bee in $P(n)$:
+		- eployedPhase(bee)
+		- onlookerPhase(bee)
+		- scoutPhase(bee)
+	- **end**
+- **end**
+
+Svaka pčela ima sledeće informacije i funkcije:
+- **pos** - trenutna pozicija pčele.
+- **bestPos** - najbolja pozicija pčele.
+- **failedImprovement** - ova promenljiva meri koliko dugo pčela nije poboljšala svoje rešenje ukoliko ovaj broj pređe neku predodređenu vrednost **strpljenja** pčela postaje izviđač i uzima novo nasumično rešenje.
+- **employedPhase** - pčela vrši lokalnu pretragu svoje okoline, ukoliko ne nađe bolje rešenje failedImprovement se povećava.
+- **onlookerPhase** - pčela postaje posmatrač i ako naiđe na pčelu koja ima bolje rešenje od njenog najboljeg rešenja prebacuje se na tu poziciju.
+- **scoutPhase** - pčela postaje izviđač onog momenta kada se pređe strpljenje.
+
+**Primer**: Tražimo minimum funkcije $f(x, y) = 20 + (x^2 - 10\cos(2\pi x) + y^2 - 10\cos(2\pi y))$ poznata i kao ["Rastrigin function"](https://en.wikipedia.org/wiki/Rastrigin_function), tražimo rešenje na $-5.12 \leq x,y \leq 5.12$. 
+
+Hladnije boje na grafu pretstavljaju niske vrednosti a toplije prtstavljaju više vrednosti.
+
+U prvom koraku pseudokoda videli smo da postavljamo sve pčele na pseudo-nasumične pozicije računamo redom firness svake i uzimamo onu vrednost koja je globalno najbolja.
+Pravimo $n$ pčela na dopuštenom domenu, { $(x, y) \| -5 \leq x,y \leq 5$ }. 
+
+| Funkcija                          | 0-ta iteracija                |
+| --------------------------------- | ----------------------------- |
+| ![](slike/SI/ABC/ABCfunction.png) | ![](slike/SI/ABC/ABCinit.png) |
+
+U prvoj iterciji za svaku pčelu vršimo sve tri faze. 
+1. faza **Employed Phase**:\
+	Pčela istražuje okolinu svog trenutnog rešenja koristeći trenutno najbolje globalno rešenje pouplacije:\
+	$$p_{new} = p_{old} + \phi_i (p_{localBest} - p_{random})$$
+	\
+	u ovoj formuli $\phi_i$ je vrednost između -1 i 1, koja uvodi stohastičnost u celu istragu, a $p_{random}$ pretstavlja pseudo-nasumičnu poziciju neke od pčela iz populacije. 
+	Ukoliko je novonađena pozicija kvalitetnija, pored izmene najboljeg lokalnog rešenja, proverava se da li je globalno bolja.
+1. faza **Onlooker Phase**:\
+	Pčela bira neku od pčela po principu ruleta, gde svaka od pčela ima šansu da bude izabrana na osnovu sledeće formule:\
+	$$p_i = \dfrac{f_i}{\sum_{i = 1}^n f_i}$$
+	\
+	Ukoliko je vrednost najboljeg rešenja izabrane pčele bolja od nabolje vrednosti pčele posmatrača, pčela posmatrač odbacuje sve resurse i prebacuje se na izabranu pčelu, inače ništa se ne dešava.
+3. faza **Scout Phase**:\
+	Ukoliko se kvalitet rešenja pčele nije poboljšalo predodređen broj iteracija pčela bira neku nasumičnu poziciju unutar domena.
+
+| iter > 5                       | iter > 20                       | iter > 30                      |
+| ------------------------------ | ------------------------------- | ------------------------------ |
+| ![](slike/SI/ABC/ABCfirst.png) | ![](slike/SI/ABC/ABCsecond.png) | ![](slike/SI/ABC/ABCthird.png) |
