@@ -488,7 +488,7 @@ Uzimamo ovakvu funkciju pošto se ova vrsta algoritma uglavnom koristi za proble
 
 Hladnije boje na grafu pretstavljaju niske vrednosti a toplije predstvaljaju više vrednosti.
 
-Prvo što smo rekli da želimo jeste da rasporedimo **n** ptica pseudo nasumično po  prostoru rešenja (domenu), dakle biramo $n$ pozicija {$(x, y) | -5 \leq x,y \leq 5$}. Dalje svakoj ptici izračunamo njenu lokalnu najbolju poziciju, njen vektor kretajna (inercija) i odredimo koje je to globalno najbolje rešenje (najbolje od svih lokalnih rešenje grupe).
+Prvo što smo rekli da želimo jeste da rasporedimo **n** ptica pseudo nasumično po  prostoru rešenja (domenu), dakle biramo $n$ pozicija { $(x, y) \| -5 \leq x,y \leq 5$ }. Dalje svakoj ptici izračunamo njenu lokalnu najbolju poziciju, njen vektor kretajna (inercija) i odredimo koje je to globalno najbolje rešenje (najbolje od svih lokalnih rešenje grupe).
 
 | Funkcija                                   | 0-ta iteracija                                   |
 | ------------------------------------------ | ------------------------------------------------ |
@@ -518,7 +518,7 @@ Očigledno inspirisano nekim istorijskim idejama o evoluciji:
 
 ### **Osnovni pojmovi:**
 1. **Hromozom/Jedinka** - kodirano rešenje, uglavnom pseudo nasumično generisano, uglavnom u vidu niza bitova i slično. (kod genetskog programiranja GP, rešenja mogu biti stabla)
-2. **Populacija **- skup više hromozoma
+2. **Populacija** - skup više hromozoma
 3. **Selekcija** - odabir jedinki koje će graditi sledeću generaciju
 4. **Ukrštanje (Crossover)** - mešanje hromozoma neke dve jedinke
 5. **Mutacija** - stohastička izmena delova hromozoma u nadi da izmene dodaju neke inovacije u populaciju
