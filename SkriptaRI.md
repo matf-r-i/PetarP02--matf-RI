@@ -785,18 +785,18 @@ Detaljno objašnjenje Algoritam jata prica (Birds flocking PSO) predstvaljeno je
 ## 10.2 Ant Colony Optimization (ACO):
 Inspirisan ponašanjem kolonije mrava. Kada pronađu neku hranu mravi traže najoptimalniji, tj. najkraći put do te hrane. 
 
-Prilikom kretanja kroz odabrani put svaki mrav iza sebe ostavlja feromone,  koji vremenom isparuju. Drugi mravi imaju opciju da prate one puteve čiji su feromoni jači.
+Prilikom kretanja kroz odabrani put svaki mrav iza sebe ostavlja feromone,  koji vremenom isparavaju. Drugi mravi imaju opciju da prate one puteve čiji su feromoni jači.
 Prilikom povratka mrava nazad u mravinjak dodatno vraća feromone na isti taj put. Samim tim, ako je put kraći, mrav će češće da prelazi put i feromoni će biti snažniji i neće stići da ispare do kraja, što privlači druge mrave.
 
-Ovakavo ponašanje možemo da iskoristimo u problemima sa grafovima, najbolji primer je **Traveling Salesman Problem (TSP)** gde tražimo najkrači put a da pritom posetimo sve gradove.
+Ovakavo ponašanje možemo da iskoristimo u problemima sa grafovima, najbolji primer je **Traveling Salesman Problem (TSP)** gde tražimo najkraći put, a da pritom posetimo sve gradove.
 
 U fazi inicijalizacije, **svakom mravu** je dodeljen **drugačiji čvor** kao početni, kako bi se izbeglo favoritizovanje rešenja na osnovu heuristike. Takođe
 
-Svaki mrav čuva svoje: 
+Svaki mrav čuva: 
 1. **početnu poziciju (dodeljeni čvor)** - uvek kreće od ovog čvora
 2. **trenutno rešenje (niz čvorova)** - resetuje se na početku svake nove iteracije
-3. **dužinu puta** - resetuje se na početku svake nove iteracije
-4. **depozit feromona** - konstanta koja se deli sa dužinom puta mrava, na osnovu čega se određuje količina feromona koja se ostavlja na tom putu.
+3. **dužinu puta (pathLen)** - resetuje se na početku svake nove iteracije
+4. **depozit feromona (Q)** - konstanta koja se deli sa dužinom puta mrava, na osnovu čega se određuje količina feromona koja se ostavlja na tom putu.
 
 Globalno se čuva **količina feromona na svim granama**.
 ### Pseudokod ACO:
@@ -810,30 +810,33 @@ Globalno se čuva **količina feromona na svim granama**.
 	- updatePheromones($pheromones(m)$)
 - **end**
 
-**Primer**: TSP sa 10 gradova:
-U prvom delu koda inicijalizujemo svakog mrava, mrava ima onoliko koliko ima čvorova (bar je to praksa) i svaki mrav kreće iz drugačijeg čvora. 
+**Primer**: TSP sa 10 gradova. U prvom delu koda inicijalizujemo svakog mrava, mrava ima onoliko koliko ima čvorova (bar je to praksa) i svaki mrav kreće iz drugačijeg čvora. 
 Inicijalizujemo i količinu feromona na svim granama:
 ![](slike/SI/ACO/nodes.png)
 
 Nakon inicijalizacije, započinjemo petlju:
 1. **resetSolution()** - nakon svake iteracije je potrebno da se resetuje rešenje, kako bi moglo da se nađe novo
-2. **findSolution()** - mrav traži novo rešenje, odnosno novi put na osnovu feromona i odabrane heuristike. Proces odabira puta je sledeći:
-	Svaki mrav bira sldeći čvor dok nije posetio sve čvorove. Gledajući čvor na kom se trenutno nalazi ($i$ - čvor), mrav posmatra sve one do kojih može da dođe i koji nisu posećeni ($j = susedi(i)$), bira put koji će preći na osnovu sledeće formule:\
+2. **findSolution()** - mrav traži novo rešenje, odnosno novi put na osnovu feromona i odabrane heuristike. Proces odabira puta je sledeći:\
+	Svaki mrav bira sledeći čvor dok nije posetio sve čvorove. Gledajući čvor na kom se trenutno nalazi ($i$ - čvor), mrav posmatra sve one koji su susedni i neposećeni ($j = susedi(i)$), bira put koji će preći na osnovu sledeće formule:\
 	$$p_{i, j} = \dfrac{\tau_{i, j}^{\alpha}n_{i, j}^{\beta}}{\sum_{k = susedi(i)}^{n}{\tau_{i, k}^{\alpha}n_{i, k}^{\beta}}}$$
 	\
 	U prethodnoj formuli:
 	- $\tau_{i, j}$ - pretstavlja količinu feromona na grani $(i, j)$ u globalnoj promenljivoj $pheromones(m)$ 
 	- $n_{i, j}$ - pretstavlja odabranu heuristiku koja će se koristiti za računanje udaljenosti čvora $i$ od $j$. (u primeru koristimo heuristiku $n_{i, j} = \dfrac{1}{distance[i][j]}$) 
-	- $\alpha$ - stepen koji odlučuje koliko će feromoni uticati na verovatnoću odabira tog čvora. Uglavnom uzima vrednosti između $[1, 2]$.
-	- $\beta$ - stepen koji odlučuje koliko će heuristika za optimalnost dužine puta uticati na verovatnoću odabirata tog čvora. Uglavnom uzima vrenosti između $[2, 5]$.
+	- $\alpha$ - stepen koji odlučuje koliko će feromoni uticati na verovatnoću odabira tog čvora. Uglavnom uzima vrednost između $[1, 2]$.
+	- $\beta$ - stepen koji odlučuje koliko će heuristika za optimalnost dužine puta uticati na verovatnoću odabirata tog čvora. Uglavnom uzima vrednost između $[2, 5]$.
 	U odnosu na verovatnoće dobijene prethodnom formulom za sve susede, mrav stohastićki bira sledeći čvor. 
-	Nakon odabira čvora on se dodaje na rešenje i dužina puta se povećava za pređeni put.
+	Nakon odabira čvora, on se dodaje na rešenje i dužina puta se povećava za pređeni put.
 3. **updatePheromones()** - na kraju svake iteracije $pheromones(m)$ se ažurira sledećom formulom:\
-	$$pheromones(i, j) = (1 - p)pheromones(i, j) + \Delta\tau_{i, j}$$
+	$$pheromones(i, j) = (1 - p)pheromones(i, j) + \sum_{k = susedi(i)}^{n}{\Delta\tau_{i, k}}$$
 	\
 	U prethodnoj formuli:
-	- $(1 - p)$ - koliko će feromoni posle svake iteracije da isparavaju, $p$ je predefinisano pre početka algoritma
-	- $\Delta\tau_{i, j}$ - suma svih feromona ispuštenih od strane mrava koji su prešli granu
+	- $(1 - p)$ - koliko će feromoni posle svake iteracije da isparavaju, $p$ je predefinisano pre početka algoritma, vrednost između $[0, 1]$
+	- $\sum_{k = susedi(i)}^{n}{\Delta\tau_{i, k}}$ - za datu granu se sumiraju feromoni svih mrava koji su prošli datu granu, gde je:\
+   	$$\Delta\tau_{i, k} = \dfrac{Q}{P[i].pathLen}$$
+   	\
+   	Q je predefinisana konstanta uglavnom broj u intervalu $[1, 100]$.
+   
 	Na ovaj način stari feromoni imaju manji uticaj na odabir sledećeg čvora čime samo rešenje vremenom konvergira.
 
 | iter > 10                   | iter > 20                   |
