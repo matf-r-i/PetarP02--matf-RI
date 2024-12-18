@@ -795,7 +795,7 @@ U fazi inicijalizacije, **svakom mravu** je dodeljen **drugačiji čvor** kao po
 Svaki mrav čuva: 
 1. **početnu poziciju (dodeljeni čvor)** - uvek kreće od ovog čvora
 2. **trenutno rešenje (niz čvorova)** - resetuje se na početku svake nove iteracije
-3. **dužinu puta (pathLen)** - resetuje se na početku svake nove iteracije
+3. **dužinu puta** - resetuje se na početku svake nove iteracije
 4. **depozit feromona (Q)** - konstanta koja se deli sa dužinom puta mrava, na osnovu čega se određuje količina feromona koja se ostavlja na tom putu.
 
 Globalno se čuva **količina feromona na svim granama**.
@@ -828,16 +828,14 @@ Nakon inicijalizacije, započinjemo petlju:
 	U odnosu na verovatnoće dobijene prethodnom formulom za sve susede, mrav stohastićki bira sledeći čvor. 
 	Nakon odabira čvora, on se dodaje na rešenje i dužina puta se povećava za pređeni put.
 3. **updatePheromones()** - na kraju svake iteracije $pheromones(m)$ se ažurira sledećom formulom:\
-	$$pheromones(i, j) = (1 - p)pheromones(i, j) + \sum_{k = susedi(i)}^{n}{\Delta\tau_{i, k}}$$
+	$$pheromones(i, j) = (1 - p)pheromones(i, j) + \sum_{k = 1}^{n}{\Delta\tau_{i, j}^k}$$
 	\
 	U prethodnoj formuli:
-	- $(1 - p)$ - koliko će feromoni posle svake iteracije da isparavaju, $p$ je predefinisano pre početka algoritma, vrednost između $[0, 1]$
-	- $\sum_{k = susedi(i)}^{n}{\Delta\tau_{i, k}}$ - za datu granu se sumiraju feromoni svih mrava koji su prošli datu granu, gde je:\
-   	$$\Delta\tau_{i, k} = \dfrac{Q}{P[i].pathLen}$$
+	- $(1 - p)$ - koliko će feromoni posle svake iteracije da isparavaju, $p$ je predefinisano pre početka algoritma, vrednost između $[0, 1]$. Na ovaj način stari feromoni imaju manji uticaj na odabir sledećeg čvora čime samo rešenje vremenom konvergira.
+	- $\Delta\tau_{i, j}^k$ - količina feromona koji mrav $k$ ostavlja na grani $(i, j)$, definisana sledećom formulom:\
+   	$$\Delta\tau_{i, j}^k = \dfrac{Q}{pathLen(k)}$$
    	\
-   	Q je predefinisana konstanta uglavnom broj u intervalu $[1, 100]$.
-   
-	Na ovaj način stari feromoni imaju manji uticaj na odabir sledećeg čvora čime samo rešenje vremenom konvergira.
+   	Q je predefinisana konstanta, uglavnom broj u intervalu $[1, 100]$. Delimo sa ukupnom dužinom puta koji je mrav $k$ prešao, radi postizanja prethodno navedene politike da kraći put ima snažniji miris feromona. 
 
 | iter > 10                   | iter > 20                   |
 | --------------------------- | --------------------------- |
