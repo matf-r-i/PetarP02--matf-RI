@@ -732,33 +732,33 @@ Samim tim ne bi želeli da nam GP pravi bilo koja stabla čiji je ukupan broj č
 Inteligencija grupa predstavlja proces u kojem jedinke istražuju svoja lokalna rešenja dok istovremeno komuniciraju i sarađuju sa ostalim članovima grupe. 
 Kroz ovu interakciju dolazi do globalnog ponašanja, što omogućava grupi da kolektivno pronađe optimalno rešenje problema ili se prilagodi promenljivim uslovima u okruženju.
 
-Jedna od bitnih osobina ovih algoritama je da su dinamički, odnoson ukoliko se prostor menja tokom rada algoritma, sposobni su da se prilagode i nađu novo rešenje.
+Jedna od bitnih osobina ovih algoritama je da su dinamički, odnosno ukoliko se prostor menja tokom rada algoritma, sposobni su da se prilagode i nađu novo rešenje.
 Primer ovakvog ponašanja je ako postavimo kamen na put koji je oformljen ka hrani od strane mrava, brzo će naći novi optimalni put ka istoj toj hrani. 
-Ovi algortimi pripadaju **P - Metaheuristikama**, i često se koriste na problemima **kontinualne** prirode.
 
-Osobina računara da brojeve čuvaju u ograničenoj memoriji, **No Free Lucnch (NFL)** teorema tvrdi da su svi **kontinualni** problemi rešavani na računarima ustvari **diskretni** problemi.
+Ovi algortimi pripadaju **P - Metaheuristikama**, i često se koriste na problemima **kontinualne** prirode. Osobina računara da brojeve čuvaju u ograničenoj memoriji, **No Free Lucnch (NFL)** teorema tvrdi da su svi **kontinualni** problemi rešavani na računarima ustvari **diskretni** problemi.
 
-Razlika ovih algoritama od EA jeste u činjenici da jedinke ovde rade zajedno, kreću se zajedno u smeru rešenja.
+Razlika ovih algoritama od EA jeste u činjenici da jedinke ovde rade zajedno, tj. kreću se zajedno u smeru rešenja.
 
-Razmena informacija unutar grupa se vrši na dva načina:
+Razmena informacija unutar grupa može se vršiti na dva načina:
 1. **Direktna** - jedinke moraju da interaguju na ličnom nivou sa drugim.
-2. **Indirektno** - individulano ponašanje menja okruženje.
+2. **Indirektno** - individulano ponašanje menja okruženje bez lične interackcije.
 
 Neki primeri:
-1. **Birds flocking optimization (PSO)**  - svaka ptica se kreće poštovaći najbolje rešenje grupe + njeno najbolje rešenje.
+1. **Particle Swarm Optimization (PSO)**  - svaka čestica računa novu inerciju poštovaći najbolje rešenje grupe + njeno najbolje rešenje + kao i njenu staru inerciju.
 2. **Ant colony optimization (ACO)** - svaki mrav ostavlja feromone prilikom traženja hrane, jačina feromona predstavlja kvalitet rešenja koji drugi mravi mogu i ne moraju da prate.
 3. **Artificial Bee Colony (ABC)** - inspirisan grupama pčela u potrazi za nektarom, postoje tri vrste pčela **izviđači** (diverzifikacija), **zaposleni** (traže lokalna rešenja) i **posmatrači** (intenzivikacija, biraju gde će se vršiti istraživanje).
-4. **Bacterial foraging optimization (BFO)** - makterije se razmnožavaju u onim delovima gde je najbolje rešenje, u svakoj generaciji se odstranjuje polovina rešenja.
+4. **Bacterial foraging optimization (BFO)** - bakterije se razmnožavaju u onim delovima gde je najbolje rešenje, u svakoj generaciji se odstranjuje polovina rešenja.
 
-
-Još jedna korist SI algoritama jeste u izgradnji trodimenzialnih tela na osnovu nekih pravila.
+Još jedna korist SI algoritama jeste u izgradnji trodimenzionalnih tela na osnovu nekih pravila.
 
 ## 10.1  Particle Swarm Optimization (PSO):
-U osnovnom PSO (Particle Swarm Optimization) algoritmu imamo grupi čestica, tako nazvanih zbog osobine da svaka jedinka ima brzinu i ubrzanje, u svakoj iteraciji se računa nova pozicija svake čestice. 
+U osnovnom PSO (Particle Swarm Optimization) algoritmu imamo grupu čestica, tako nazvanih zbog osobine da svaka jedinka ima brzinu i ubrzanje, u svakoj iteraciji se računa nova pozicija svake čestice. 
+Inspirisani su kretanjem jata ptica i jatom riba.
 
-Svaka čestica čuva **najbolju poziciju čestice ($p_{local}$)**, **najbolju poziciju grupe ($p_{global}$)** i **inerciju čestice ($v_i$)** kao i **trenutnu poziciju čestice ($p_{pos}$)**.
+Svaka čestica čuva **svoju najbolju poziciju čestice ($p_{local}$)**, **inerciju čestice ($v_i$)** kao i **trenutnu poziciju čestice ($p_{pos}$)**. 
+Dok se glovalno pamti i po potrebi menja **najbolja pozicija grupe ($p_{global}$)**.
 
-Formula po kojoj se računa novi momentum čestice:\
+Formula po kojoj se računa nova inercija čestice:\
 $$v_i = c_iv_i + c_{local}r_{local}v_{local} + c_{global}r_{global}v_{global}$$\
 gde su:
 1. $v_{global} = p_{global} - p_{pos}$ **vektor ka najboljem rešenju grupe**,
@@ -782,7 +782,74 @@ Bitna je vrednost $c_i$ jer omogućava kontrolu intenzifikacije i diverzifikacij
 
 Detaljno objašnjenje Algoritam jata prica (Birds flocking PSO) predstvaljeno je u [8.2](#82-population-based-p---metaheuristika).
 
-## 10.2 Artificial Bee Colony (ABC):
+## 10.2 Ant Colony Optimization (ACO):
+Inspirisan ponašanjem kolonije mrava. Kada pronađu neku hranu mravi traže najoptimalniji, tj. najkraći put do te hrane. 
+
+Prilikom kretanja kroz odabrani put svaki mrav iza sebe ostavlja feromone,  koji vremenom isparuju. Drugi mravi imaju opciju da prate one puteve čiji su feromoni jači.
+Prilikom povratka mrava nazad u mravinjak dodatno vraća feromone na isti taj put. Samim tim, ako je put kraći, mrav će češće da prelazi put i feromoni će biti snažniji i neće stići da ispare do kraja, što privlači druge mrave.
+
+Ovakavo ponašanje možemo da iskoristimo u problemima sa grafovima, najbolji primer je **Traveling Salesman Problem (TSP)** gde tražimo najkrači put a da pritom posetimo sve gradove.
+
+U fazi inicijalizacije, **svakom mravu** je dodeljen **drugačiji čvor** kao početni, kako bi se izbeglo favoritizovanje rešenja na osnovu heuristike. Takođe
+
+Svaki mrav čuva svoje: 
+1. **početnu poziciju (dodeljeni čvor)** - uvek kreće od ovog čvora
+2. **trenutno rešenje (niz čvorova)** - resetuje se na početku svake nove iteracije
+3. **dužinu puta** - resetuje se na početku svake nove iteracije
+4. **depozit feromona** - konstanta koja se deli sa dužinom puta mrava, na osnovu čega se određuje količina feromona koja se ostavlja na tom putu.
+
+Globalno se čuva **količina feromona na svim granama**.
+### Pseudokod ACO:
+- generiši populaciju $P(n)$
+- inicijalizuj feromone na svim granama $pheromones(m)$ 
+- **while** nisu ispunjeni uslovi:
+	- **for** ant in $P(n)$
+		- resetSolution(ant)
+		- findSolution(ant)
+	- **end**
+	- updatePheromones($pheromones(m)$)
+- **end**
+
+**Primer**: TSP sa 10 gradova:
+U prvom delu koda inicijalizujemo svakog mrava, mrava ima onoliko koliko ima čvorova (bar je to praksa) i svaki mrav kreće iz drugačijeg čvora. 
+Inicijalizujemo i količinu feromona na svim granama:
+![](slike/SI/ACO/nodes.png)
+
+Nakon inicijalizacije, započinjemo petlju:
+1. **resetSolution()** - nakon svake iteracije je potrebno da se resetuje rešenje, kako bi moglo da se nađe novo
+2. **findSolution()** - mrav traži novo rešenje, odnosno novi put na osnovu feromona i odabrane heuristike. Proces odabira puta je sledeći:
+	Svaki mrav bira sldeći čvor dok nije posetio sve čvorove. Gledajući čvor na kom se trenutno nalazi ($i$ - čvor), mrav posmatra sve one do kojih može da dođe i koji nisu posećeni ($j = susedi(i)$), bira put koji će preći na osnovu sledeće formule:\
+	$$p_{i, j} = \dfrac{\tau_{i, j}^{\alpha}n_{i, j}^{\beta}}{\sum_{k = susedi(i)}^{n}{\tau_{i, k}^{\alpha}n_{i, k}^{\beta}}}$$
+	\
+	U prethodnoj formuli:
+	- $\tau_{i, j}$ - pretstavlja količinu feromona na grani $(i, j)$ u globalnoj promenljivoj $pheromones(m)$ 
+	- $n_{i, j}$ - pretstavlja odabranu heuristiku koja će se koristiti za računanje udaljenosti čvora $i$ od $j$. (u primeru koristimo heuristiku $n_{i, j} = \dfrac{1}{distance[i][j]}$) 
+	- $\alpha$ - stepen koji odlučuje koliko će feromoni uticati na verovatnoću odabira tog čvora. Uglavnom uzima vrednosti između $[1, 2]$.
+	- $\beta$ - stepen koji odlučuje koliko će heuristika za optimalnost dužine puta uticati na verovatnoću odabirata tog čvora. Uglavnom uzima vrenosti između $[2, 5]$.
+	U odnosu na verovatnoće dobijene prethodnom formulom za sve susede, mrav stohastićki bira sledeći čvor. 
+	Nakon odabira čvora on se dodaje na rešenje i dužina puta se povećava za pređeni put.
+3. **updatePheromones()** - na kraju svake iteracije $pheromones(m)$ se ažurira sledećom formulom:\
+	$$pheromones(i, j) = (1 - p)pheromones(i, j) + \Delta\tau_{i, j}$$
+	\
+	U prethodnoj formuli:
+	- $(1 - p)$ - koliko će feromoni posle svake iteracije da isparavaju, $p$ je predefinisano pre početka algoritma
+	- $\Delta\tau_{i, j}$ - suma svih feromona ispuštenih od strane mrava koji su prešli granu
+	Na ovaj način stari feromoni imaju manji uticaj na odabir sledećeg čvora čime samo rešenje vremenom konvergira.
+
+| iter > 10                   | iter > 20                   |
+| --------------------------- | --------------------------- |
+| ![](slike/SI/ACO/path1.png) | ![](slike/SI/ACO/path2.png) |
+
+Primetimo da one grane koje su češće posećivane se više ističu. 
+
+| iter > 50                   | last iter                   |
+| --------------------------- | --------------------------- |
+| ![](slike/SI/ACO/path3.png) | ![](slike/SI/ACO/path4.png) |
+
+Samim tim odabirom najboljih rešenja, taj put će se na samom kraju najviše istaći.
+
+
+## 10.3 Artificial Bee Colony (ABC):
 Algoritam je zasnovan na ponašanju pčela prilikom traženja polena. 
 Pčele komuniciraju plesom, kojim govore ostalim pčelama gde se nalazi više polena, odnosno gde je kvalitetnije rešenje.
 
@@ -791,7 +858,7 @@ Pčele su podeljene na tri grupe:
 2. **Onlooker bees (Posmatrači)** - ove pčele na osnovu kvaliteta ostalih pčela i njihovog "plesa" biraju da li će nastaviti da iscrpljuju svoje resurse ili će preći na neki bolji resurs populacije.
 3. **Scout bees (Izviđači)** - ovo su pčele koje nakon što su iscrpile svoj resurs biraju neki sledeći neistraženi resurs.
 
-Dakle ideja je sledeća zaposlene pčele prikuljaju polen (lokalno rešenje jedinke ekploatacija), dok pčele posmatrači nadgledaju i traže one pčele koje su našle najviše polena i šalju druge pčele da rade na tim pozicijama (konvergencija rešenja) i na kraju pčele istraživači traže druge izvore polena (eksploracija).
+Dakle ideja je sledeća, zaposlene pčele prikuljaju polen (poboljšava lokalno svoje rešenje , tj. eksploatacija), dok pčele posmatrači nadgledaju i traže one pčele koje su našle najviše polena i šalju druge pčele da rade na tim pozicijama (konvergencija rešenja) i na kraju pčele istraživači traže druge izvore polena (eksploracija).
 
 Mada su pomenute kao tri različite grupe pčela, ustvari svaka pčela unutar populacije menja svoju ulogu, pa se može reći i da prolazi kroz 3 faze ponašanja u svakoj iteraciji. 
 ### Pseudokod ABC:
@@ -799,7 +866,7 @@ Mada su pomenute kao tri različite grupe pčela, ustvari svaka pčela unutar po
 - nadji globalniMin = min($P(n)$)
 - **while** nisu ispunjeni uslovi:
 	- **for** bee in $P(n)$:
-		- eployedPhase(bee)
+		- employedPhase(bee)
 		- onlookerPhase(bee)
 		- scoutPhase(bee)
 	- **end**
@@ -808,35 +875,35 @@ Mada su pomenute kao tri različite grupe pčela, ustvari svaka pčela unutar po
 Svaka pčela ima sledeće informacije i funkcije:
 - **pos** - trenutna pozicija pčele.
 - **bestPos** - najbolja pozicija pčele.
-- **failedImprovement** - ova promenljiva meri koliko dugo pčela nije poboljšala svoje rešenje ukoliko ovaj broj pređe neku predodređenu vrednost **strpljenja** pčela postaje izviđač i uzima novo nasumično rešenje.
-- **employedPhase** - pčela vrši lokalnu pretragu svoje okoline, ukoliko ne nađe bolje rešenje failedImprovement se povećava.
-- **onlookerPhase** - pčela postaje posmatrač i ako naiđe na pčelu koja ima bolje rešenje od njenog najboljeg rešenja prebacuje se na tu poziciju.
-- **scoutPhase** - pčela postaje izviđač onog momenta kada se pređe strpljenje.
+- **failedImprovement** - ova promenljiva meri koliko dugo pčela nije poboljšala svoje rešenje ukoliko ovaj broj prekorači predodređenu vrednost **strpljenja** pčela postaje izviđač i uzima novo nasumično rešenje.
+- **employedPhase()** - pčela vrši lokalnu pretragu svoje okoline, ukoliko ne nađe bolje rešenje failedImprovement se povećava.
+- **onlookerPhase()** - pčela postaje posmatrač i ako naiđe na pčelu koja ima bolje rešenje od njenog najboljeg rešenja prebacuje se na tu poziciju.
+- **scoutPhase()** - pčela postaje izviđač onog momenta kada se pređe strpljenje.
 
 **Primer**: Tražimo minimum funkcije $f(x, y) = 20 + (x^2 - 10\cos(2\pi x) + y^2 - 10\cos(2\pi y))$ poznata i kao ["Rastrigin function"](https://en.wikipedia.org/wiki/Rastrigin_function), tražimo rešenje na $-5.12 \leq x,y \leq 5.12$. 
 
-Hladnije boje na grafu pretstavljaju niske vrednosti a toplije prtstavljaju više vrednosti.
+Hladnije boje na grafu pretstavljaju niže vrednosti a toplije prtstavljaju više vrednosti.
 
-U prvom koraku pseudokoda videli smo da postavljamo sve pčele na pseudo-nasumične pozicije računamo redom firness svake i uzimamo onu vrednost koja je globalno najbolja.
-Pravimo $n$ pčela na dopuštenom domenu, { $(x, y) \| -5 \leq x,y \leq 5$ }. 
+U prvom koraku pseudokoda videli smo da postavljamo sve pčele na pseudo-nasumične pozicije, računamo redom fitness svake i uzimamo onu vrednost koja je globalno najbolja.
+Pravimo $n$ pčela na dopuštenom domenu, { $(x, y) | -5 \leq x,y \leq 5$ }. 
 
 | Funkcija                          | 0-ta iteracija                |
 | --------------------------------- | ----------------------------- |
 | ![](slike/SI/ABC/ABCfunction.png) | ![](slike/SI/ABC/ABCinit.png) |
 
-U prvoj iterciji za svaku pčelu vršimo sve tri faze. 
-1. faza **Employed Phase**:\
+U prvoj iteraciji za svaku pčelu vršimo sve tri faze. 
+1. **Employed Phase**:\
 	Pčela istražuje okolinu svog trenutnog rešenja koristeći trenutno najbolje globalno rešenje pouplacije:\
 	$$p_{new} = p_{old} + \phi_i (p_{localBest} - p_{random})$$
 	\
-	u ovoj formuli $\phi_i$ je vrednost između -1 i 1, koja uvodi stohastičnost u celu istragu, a $p_{random}$ pretstavlja pseudo-nasumičnu poziciju neke od pčela iz populacije. 
+	u ovoj formuli $\phi_i$ je vrednost između -1 i 1, koja uvodi stohastičnost u celu pretragu, a $p_{random}$ pretstavlja pseudo-nasumičnu poziciju neke od pčela iz populacije. 
 	Ukoliko je novonađena pozicija kvalitetnija, pored izmene najboljeg lokalnog rešenja, proverava se da li je globalno bolja.
-1. faza **Onlooker Phase**:\
+1. **Onlooker Phase**:\
 	Pčela bira neku od pčela po principu ruleta, gde svaka od pčela ima šansu da bude izabrana na osnovu sledeće formule:\
 	$$p_i = \dfrac{f_i}{\sum_{i = 1}^n f_i}$$
 	\
 	Ukoliko je vrednost najboljeg rešenja izabrane pčele bolja od nabolje vrednosti pčele posmatrača, pčela posmatrač odbacuje sve resurse i prebacuje se na izabranu pčelu, inače ništa se ne dešava.
-3. faza **Scout Phase**:\
+3. **Scout Phase**:\
 	Ukoliko se kvalitet rešenja pčele nije poboljšalo predodređen broj iteracija pčela bira neku nasumičnu poziciju unutar domena.
 
 | iter > 5                       | iter > 20                       | iter > 30                      |
