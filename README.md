@@ -17,6 +17,7 @@ clearNeki materijali za kurs Računarske inteligencije, četvrte godine Matemati
     9.2. [Genetsko programiranje GP](SkriptaRI.md/#92-genetsko-programiranje-gp)
 10. [Inteligencija grupa (SI - Swarm Intelligence)](SkriptaRI.md/#10-inteligencija-grupa-si---swarm-intelligence)\
 	10.1 [Particle Swarm Optimization (PSO)](SkriptaRI.md/#101--particle-swarm-optimization-pso)\
-	10.2 [Artificial Bee Colony (ABC)](SkriptaRI.md/#102-artificial-bee-colony-abc)
+	10.2 [Ant Colony Optimization (ACO)](SkriptaRI.md/#102-ant-colony-optimization-aco)\
+ 	10.3 [Artificial Bee Colony (ABC)](SkriptaRI.md/#103-artificial-bee-colony-abc)
 
 Skripta pisana u Obsidian-u.
