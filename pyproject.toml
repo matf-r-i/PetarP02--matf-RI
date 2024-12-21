@@ -12,7 +12,8 @@ jupyter = "^1.1.1"
 linopy = "^0.4.3"
 gurobipy = "^11.0.0"
 numpy = "^1.25"
-
+ipywidgets = "^8.1.0" 
+matplotlib = "^3.7.2" 
 
 [build-system]
 requires = ["poetry-core"]
