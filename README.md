@@ -1,6 +1,7 @@
 clearNeki materijali za kurs Računarske inteligencije, četvrte godine Matematičkog fakulteta u Beogradu.
 
 # [Skripta](SkriptaRI.md):
+[Skripta (pdf)](SkriptaRI.pdf)
 ## Trenutno obuhvaćene oblasti:
 1. [Uvod](SkriptaRI.md/#1-uvod)
 2. [Paradigme u veštačkoj inteligenciji](SkriptaRI.md/#2-paradigme-u-veštačkoj-inteligenciji) - u izradi
@@ -19,5 +20,12 @@ clearNeki materijali za kurs Računarske inteligencije, četvrte godine Matemati
 	10.1 [Particle Swarm Optimization (PSO)](SkriptaRI.md/#101--particle-swarm-optimization-pso)\
 	10.2 [Ant Colony Optimization (ACO)](SkriptaRI.md/#102-ant-colony-optimization-aco)\
  	10.3 [Artificial Bee Colony (ABC)](SkriptaRI.md/#103-artificial-bee-colony-abc)
+
+Interaktivna verzija skripte, [notebook](notebooks/SkriptaRI.ipynb).
+Kratko uputstvo:
+- Klonirati repozitorijum
+- Pokrenuti ```poetry install``` komandu
+	- Ako je pokrenuto u VSC izabrati dobar kernel
+- Pokrenuti ```jupyter-notebook``` komandu
 
 Skripta pisana u Obsidian-u.
