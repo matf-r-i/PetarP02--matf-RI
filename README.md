@@ -24,8 +24,10 @@ clearNeki materijali za kurs Računarske inteligencije, četvrte godine Matemati
 Interaktivna verzija skripte, [notebook](notebooks/SkriptaRI.ipynb).
 Kratko uputstvo:
 - Klonirati repozitorijum
+- Potrebno imati instaliran ```python```, ```poetry```, ```jupyter```
 - Pokrenuti ```poetry install``` komandu
-	- Ako je pokrenuto u VSC izabrati dobar kernel
+- Izabrati dobar kernel pokretavši ```poetry shell```
 - Pokrenuti ```jupyter-notebook``` komandu
+- Kad se završi sa radom u notebook-u, poziva se ```exit``` komanda da bi se izašlo iz shella
 
 Skripta pisana u Obsidian-u.
