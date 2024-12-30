@@ -1,4 +1,4 @@
-clearNeki materijali za kurs Računarske inteligencije, četvrte godine Matematičkog fakulteta u Beogradu.
+Nezvanični materijali za kurs Računarske inteligencije, četvrte godine Matematičkog fakulteta u Beogradu.
 
 # [Skripta](SkriptaRI.md):
 [Skripta (pdf)](SkriptaRI.pdf)
