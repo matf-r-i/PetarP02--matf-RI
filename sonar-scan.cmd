@@ -1,0 +1,2 @@
+SET SONAR_TOKEN = db554ca7791ed5700737fa4f292768e80f5966d5
+C:\vlado\_scoop\apps\sonar-scanner\current\bin\sonar-scanner.bat -X -Dsonar.organization=matf-r-i -Dsonar.projectKey=matf-r-i_PetarP02--matf-RI -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io
