@@ -780,7 +780,7 @@ Bitna je vrednost $c_i$ jer omogućava kontrolu intenzifikacije i diverzifikacij
 	- **end**
 - **end**
 
-Detaljno objašnjenje Algoritam jata prica (Birds flocking PSO) predstvaljeno je u [8.2](#82-population-based-p---metaheuristika).
+Detaljno objašnjenje Algoritam jata prica (Birds flocking PSO) predstvaljeno je u 8.2.
 
 ## 10.2 Ant Colony Optimization (ACO):
 Inspirisan ponašanjem kolonije mrava. Kada pronađu neku hranu mravi traže najoptimalniji, tj. najkraći put do te hrane. 
